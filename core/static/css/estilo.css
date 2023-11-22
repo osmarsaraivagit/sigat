@@ -1,0 +1,9 @@
+label{padding:0; padding-top:6px;}
+
+.topo{color: rgba(41, 205, 255, 0.897); margin:auto; text-align: center;}
+
+#corpo{background-color:rgb(223, 229, 233); width:400px; height:220px; margin:auto;
+text-align:center}
+
+#title{background-color: rgba(rgba(41, 205, 255, 0.897); color: hsl(0, 0%, 100%); width: 400px;
+height: 40px; margin: auto; margin-bottom: 20px; text-align: center; padding-top: 8px; font-size: 15px;}
