@@ -9,5 +9,6 @@ def home(request):
 
 def lista_localidades(request):
     form = LocalidadesForm
-    localidades = Localidades.objects.all().order_by('nome')
+    localidades = Localidades.objects.all().order_by('cidade')
+    return render(request, 'core/lista_localidades.html', {'form': form, 'localidades': localidades})
 
