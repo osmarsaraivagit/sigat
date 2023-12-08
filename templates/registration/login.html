@@ -20,12 +20,13 @@
      
     </div>
 
+</div>
     <div id="corpo">
         <div id="title">LOGIN</div>
         <form method="post" action="{% url 'login' %}">
         {% csrf_token %}
         <div class="form-group row">
-            <label class="control-label col-sm-3" style="color: #F0F8FF" for="id_username">Usuário:</label>
+            <label class="control-label col-sm-3" for="id_username">Usuário:</label>
             <div class="col-sm-8">
                 <input type="text" class="form-control" id="id_username" autofocus autocomplete="username"
                 required name="username">
@@ -33,7 +34,7 @@
         </div>
 
         <div class="form-group row">
-            <label class="control-label col-sm-3" style="color: #F0F8FF" for="id_password">Senha:</label>
+            <label class="control-label col-sm-3"  for="id_password">Senha:</label>
             <div class="col-sm-8">
                 <input type="password" class="form-control" autocomplete="current-password" required
                 id="id_password" name="password">
@@ -43,7 +44,7 @@
     </form>
 
     {# Assumes you setup the password_reset view in your URLconf #}
-    <p><a href="{% url 'password_reset' %}" style="color: #F0F8FF">Esqueceu a senha?</a></p>
+    <p><a href="{% url 'password_reset' %}" >Esqueceu a senha?</a></p>
     </div>
 
 
