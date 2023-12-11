@@ -15,12 +15,20 @@
 
 <div class="container-fluid">
 
+    <div class="container-fluid">
+     
+        <nav class="navbar navbar-expand-lg navbar-light bg-primary">
+
     <div class="topo">
         <h1>Sistema de Gestão Administrativa e Financeira de Transportes</h1>
      
     </div>
 
+
 </div>
+<br/>
+<br/>
+<br/>
     <div id="corpo">
         <div id="title">LOGIN</div>
         <form method="post" action="{% url 'login' %}">
@@ -40,7 +48,7 @@
                 id="id_password" name="password">
             </div>  
         </div>
-        <input type="submit" value="Entrar" class="btn btn-warning">
+        <input type="submit" value="Entrar" class="btn btn-primary btn">
     </form>
 
     {# Assumes you setup the password_reset view in your URLconf #}

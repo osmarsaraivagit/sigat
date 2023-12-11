@@ -3,20 +3,20 @@ input{
     border: 1px solid #ccc; padding-top: 5px;
 }
 
-.topo{ color:darkblue; margin:auto; text-align: center;}
+.topo{ color:rgb(231, 231, 240); margin:auto; text-align: center;}
 
-#corpo{ background-color:#fff; width: 400px; height: 220px; margin: auto;
+#corpo{ background-color:#deec9d; width: 400px; height: 220px; margin: auto;
     text-align: center;}
 
-#title{ background-color:#163550; color: #fff; width: 400px; 
+#title{ background-color:#7c7a13; color: #fff; width: 400px; 
     height: 40px; margin: auto; margin-bottom: 20px; text-align: center; padding-top: 8px; font-size: 16px;}
 
 #corpo2{ min-height: 600px;}
 
 .form1{
-    background-color:#e6f2ff; width:550px; height:110px; margin:auto; border:solid #CCC 1px;
+    background-color:#e6f2ff; width:500px; height:200px; margin:auto; border:solid #CCC 1px;
     margin-top:30px; padding-top:40px; 
-}
+}   
 .botoes{ 
     width:100%; margin:auto; margin-top:10px; margin-bottom:10px; margin-left: 20px;
     background-color:#FFF; cursor:pointer; 

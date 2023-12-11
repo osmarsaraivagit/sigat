@@ -3,10 +3,10 @@
 {% block content %}
 
 <div class="titulo">Localidades</div>
-<form name="form" id="form" class="form-horizontal" method="GET" action="{% url 'lista_localidade_search' %}">
+<form name="form" id="form" class="form-horizontal" method="GET" action="#">
     <div class="form-group row">
         <label for="nome" class="col-sm-2 col-form-label">Localidade:</label>
-        <div class="col-sm-8">54
+        <div class="col-sm-8">
             <input type="text" class="form-control form-control-lg" name="search" id="search" placeholder="Digite a Função para pesquisar">
         </div>
         <div class="col-sm-1">
@@ -19,20 +19,21 @@
 
     <div class="botoes">
         <div class="form-group">
-            <a href="{% url 'localidades_novo' %}" style="color:#fff" class="btn btn-primary">
+            <a href="{% url 'localidade_novo' %}" style="color:#fff" class="btn btn-primary">
             <span class = "glyphicon glyphicon-plus" id="search-btn"
             style="margin-left: 5px; margin-right: 10px; font-size: 18px; padding-bottom:5px;"> Novo
             </span></a>
         </div>
     </div>
 
-    {% if messages %}
+   <!--<div>
+   {% if messages %}
     <div class="alert alert-warning">
             {% for m in messages %}
                 <p {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ m }}</p>
             {% endfor %}
         </div>
-    {% endif %}
+    {% endif %}<!---->
 
     <div class="form2">
         <table class="table table-striped table-bordered table-hover">
@@ -43,11 +44,13 @@
             </tr>
             </thead>
             <tbody>
-            {% for localidade in localidade %}
+            {% for localidade in localidades %}
             <tr>
                 <td>{{ localidade.cidade }}</td>
+                <td>{{ localidade.estado }}</td>
+                <td>{{ localidade.pais }}</td>
                 <td style="width:50px; text-align: center;">
-                <a href="{% url 'localidade_update' funcao.id %}" style="color:#fff" class="btn btn-primary">
+                <a href="{% url 'localidade_update' localidade.id %}" style="color:#fff" class="btn btn-primary">
                 <span class = "glyphicon glyphicon-edit"
                 style="margin-left: 5px; margin-right: 5px; font-size: 10px; padding-bottom:5px;">
                 </span></a>
@@ -59,15 +62,15 @@
 </div>
 <div class="pagination">
     <span class="step-links">
-    {% if localidades.has_previous %}
-        <a href="?page={{ funcoes.prevdkeslo3i2n ious_page_number }}">
+    {% if "#" %}
+        <a href="?page=#">
         <span class = "glyphicon glyphicon-arrow-left"
         style="margin-left: 5px; margin-right: 10px; font-size: 18px; padding-bottom:5px;">
         </span></a>
     {% endif %}
     </span>
 
-    <span>
+    <!--<span>
         {{ localidades.number }} de {{ localidades.paginator.num_pages }}
     </span>
 
@@ -80,10 +83,10 @@
     {% endif %}
     </span>
 </div>
+</form><!-->
+
+
 </form>
 
 {% endblock%}
-</form>
-
-
 

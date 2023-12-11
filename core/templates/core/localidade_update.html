@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="titulo">LOCALIDADES</div>
+<form name="form" id="form" class="form-horizontal" method="post" action="{% url 'localidade_update' localidade.id %}">
+    {% csrf_token %}
+    <div class="form1">
+        <div class="form-group">
+            <label class="control-label col-sm-3" for="nome">Cidade:</label>
+            <div class="col-sm-16">
+                <input type="text" name="cidade" maxlength="50" required id="id_cidade" value="{{ localidade.cidade }}">
+            </div>
+        </br>
+     
+            <label class="control-label col-sm-3" for="nome">Estado:</label>
+            <div class="col-sm-16">
+                <input type="text" name="estado" maxlength="2" required id="id_estado" value="{{ localidade.estado }}">
+            </div>
+        </br>
+            <label class="control-label col-sm-3" for="nome">Pais:</label>
+            <div class="col-sm-16">
+                <input type="text" name="pais" maxlength="50" required id="id_pais" value="{{ localidade.pais }}">
+            </div>
+        </br>
+
+    </div> <!--Final da div form1-->
+
+    <div class="botoes">
+        <div class="form-group">
+            <Button type = "submit" class = "btn btn-primary btn-lg">
+                <span class = "glyphicon glyphicon-plus" 
+                style="margin-left: 5px; margin-right: 5px; font-size: 18px; padding-bottom:5px;">Alterar</span>
+            </Button>                
+        </div>
+    </div>
+
+    {% if messages %}
+    <div class="alert alert-warning">
+            {% for m in messages %}
+                <p {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ m }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+</form>
+
+{% endblock%}
+
