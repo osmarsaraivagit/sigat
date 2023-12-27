@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<div class="titulo">LOCALIDADES</div>
+<div class="titulo">LOCALIDADES - ORIGENS E DESTINOS</div>
 <form name="form" id="form" class="form-horizontal" method="post" action="">
     {% csrf_token %}
     <div class="form1">
@@ -31,10 +31,11 @@
         <div class="form-group">
             <Button type = "submit" class = "btn btn-primary btn-lg">
                 <span class = "glyphicon glyphicon-plus" 
-                style="margin-left: 5px; margin-right: 5px; font-size: 18px; padding-bottom:5px;"> Incluir</span>
+                style="margin-left: 5px; margin-right: 5px; font-size: 18px; padding-bottom:5px;">Incluir</span>
             </Button>                
         </div>
     </div>
+
 
     {% if messages %}
     <div class="alert alert-warning">

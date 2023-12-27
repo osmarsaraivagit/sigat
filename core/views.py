@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.http import HttpResponse, HttpRequest
+from django.core.paginator import Paginator
 from .models import Localidades
 from .forms import LocalidadesForm
 
@@ -8,10 +10,19 @@ from .forms import LocalidadesForm
 def home(request):
     return render(request, 'core/home.html')
 
+
+
 def lista_localidades(request):
     form = LocalidadesForm
-    localidades = Localidades.objects.all().order_by('cidade')
-    return render(request, 'core/lista_localidades.html', {'form': form, 'localidades': localidades})
+    localidades_list = Localidades.objects.all().order_by('cidade')
+    paginator = Paginator(localidades_list, 2)
+    page = request.GET.get('page')
+    localidades = paginator.get_page(page)
+    data = {}
+    data['localidades'] = localidades
+    data['form'] = form
+    return render(request, 'core/lista_localidades.html', data)
+
 
 def localidade_novo(request):
     if request.method == "POST":
@@ -35,6 +46,7 @@ def localidade_novo(request):
 def localidade_update(request, id):
     localidade = Localidades.objects.get(id=id)
     form = LocalidadesForm(request.POST or None, instance=localidade)
+    messages.success(request, "Atenção! Você pode atualizar ou excluir o dado acima!")
     data={}
     data['localidade'] = localidade
     data['form'] = form
@@ -45,3 +57,20 @@ def localidade_update(request, id):
     else:
         form = LocalidadesForm
         return render(request, 'core/localidade_update.html', data)
+    
+    
+def localidade_search(request):
+        search = request.GET.get('search')
+        localidade = Localidades.objects.filter(cidade__icontains=search)
+        form = LocalidadesForm()
+        data = {}
+        data['localidades'] = localidade
+        data['form'] = form
+        return render (request, 'core/lista_localidades.html', data)
+    
+     
+def localidade_delete(request, id):
+    localidade = Localidades.objects.get(id=id)
+    localidade.delete()
+    messages.success(request, "Registro Excluído com Sucesso!")
+    return redirect('lista_localidades')
