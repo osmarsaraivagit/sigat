@@ -4,18 +4,21 @@ from django.http import HttpResponse, HttpRequest
 from django.core.paginator import Paginator
 from .models import Localidades
 from .forms import LocalidadesForm
-
+from django.views.generic import DeleteView
+from django.urls import reverse_lazy
 
 
 def home(request):
     return render(request, 'core/home.html')
-
+  
+def localidades_confirm_delete(request):
+    return render(request, 'core/localidades_confirm_delete.html')
 
 
 def lista_localidades(request):
     form = LocalidadesForm
     localidades_list = Localidades.objects.all().order_by('cidade')
-    paginator = Paginator(localidades_list, 2)
+    paginator = Paginator(localidades_list, 5)
     page = request.GET.get('page')
     localidades = paginator.get_page(page)
     data = {}
@@ -46,13 +49,13 @@ def localidade_novo(request):
 def localidade_update(request, id):
     localidade = Localidades.objects.get(id=id)
     form = LocalidadesForm(request.POST or None, instance=localidade)
-    messages.success(request, "Atenção! Você pode atualizar ou excluir o dado acima!")
     data={}
     data['localidade'] = localidade
     data['form'] = form
     if request.method == "POST":
         if form.is_valid():
             form.save()
+            messages.success(request, "Registro atualizado com Sucesso!")
             return redirect('lista_localidades')
     else:
         form = LocalidadesForm
@@ -74,3 +77,11 @@ def localidade_delete(request, id):
     localidade.delete()
     messages.success(request, "Registro Excluído com Sucesso!")
     return redirect('lista_localidades')
+
+
+#class LocalidadeDeleteView(DeleteView):
+   # model = Localidades
+    #success_url= reverse_lazy(
+        #"lista_localidade"
+    #)
+ 

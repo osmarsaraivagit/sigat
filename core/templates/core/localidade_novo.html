@@ -3,7 +3,7 @@
 {% block content %}
 
 <div class="titulo">LOCALIDADES - ORIGENS E DESTINOS</div>
-<form name="form" id="form" class="form-horizontal" method="post" action="">
+<form name="form" id="form" class="form-horizontal" method="post" action="{% url 'localidade_novo' %}">
     {% csrf_token %}
     <div class="form1">
         <div class="form-group">

@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
 
+
 {% block content %}
+
+
 
 <div class="titulo">Localidades</div>
 <form name="form" id="form" class="form-horizontal" method="GET" action="{% url 'localidade_search' %}">
@@ -61,12 +64,18 @@
                 <td style="width:50px; text-align: center;">
                 <a href="{% url 'localidade_update' localidade.id %}" style="color:#fff" class="btn btn-primary">
                 <span class = "glyphicon glyphicon-edit">
+                    
+    
 
             </tr>
             {% endfor %}
             
+        
    
         </table>
+
+        
+
 </div>
 <div class="pagination">
     <span class="step-links">
@@ -92,9 +101,11 @@
     </span>
 </div>
 </form>
-
-
 </form>
 
+
 {% endblock%}
+
+
+
 
