@@ -6,7 +6,8 @@ from .models import Localidades
 from .forms import LocalidadesForm
 from django.views.generic import DeleteView
 from django.urls import reverse_lazy
-
+from .models import Empresas
+from .forms import EmpresasForm
 
 def home(request):
     return render(request, 'core/home.html')
@@ -78,10 +79,15 @@ def localidade_delete(request, id):
     messages.success(request, "Registro Excluído com Sucesso!")
     return redirect('lista_localidades')
 
+#empresas
 
-#class LocalidadeDeleteView(DeleteView):
-   # model = Localidades
-    #success_url= reverse_lazy(
-        #"lista_localidade"
-    #)
- 
+def lista_empresas(request):
+    form = LocalidadesForm
+    localidades_list = Localidades.objects.all().order_by('cidade')
+    paginator = Paginator(localidades_list, 5)
+    page = request.GET.get('page')
+    localidades = paginator.get_page(page)
+    data = {}
+    data['localidades'] = localidades
+    data['form'] = form
+    return render(request, 'core/lista_localidades.html', data)
