@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.urls import path
-from .views import home, lista_localidades, localidade_novo, localidade_update, localidade_search, localidade_delete, lista_empresas
+from .views import home, lista_localidades, localidade_novo, localidade_update, localidade_search, localidade_delete
+from .views import lista_empresas, empresa_novo, empresa_update, empresa_search, empresa_delete
 
 urlpatterns = [
     
@@ -15,7 +16,12 @@ urlpatterns = [
     path('localidade_delete/<int:id>', localidade_delete, name='localidade_delete'),
     
     #empresas
-    path('empresas/lista_empresas', lista_empresas, name='lista_empresas'),
+    path('lista_empresas', lista_empresas, name='lista_empresas'),
+    path('empresa_novo', empresa_novo, name='empresa_novo'),
+    path('empresa_update/<int:id>', empresa_update, name='empresa_update'),
+    path('empresa_search', empresa_search, name='empresa_search'),
+    path('empreesa_delete/<int:id>', empresa_delete, name='empresa_delete'),
+    
     
 ]
 
