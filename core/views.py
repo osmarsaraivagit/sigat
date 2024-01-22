@@ -2,10 +2,10 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.http import HttpResponse, HttpRequest
 from django.core.paginator import Paginator
-from .models import Localidades
+from .models import Localidades, Empresas
 from .forms import LocalidadesForm
-from .models import Empresas
 from .forms import EmpresasForm
+
 
 def home(request):
     return render(request, 'home.html')
@@ -100,8 +100,8 @@ def empresa_novo(request):
     if request.method == "POST":
         nome = request.POST.get('nome') 
         cnpj = request.POST.get('cnpj') 
-        count_1= empresas.objects.filter(nome=nome).count()
-        count_2= empresas.objects.filter(cnpje=cnpj).count()
+        count_1= Empresas.objects.filter(nome=nome).count()
+        count_2= Empresas.objects.filter(cnpj=cnpj).count()
         if count_1 and count_2 > 0:
                 messages.error(request, "Registro já cadastrado com estes mesmos nomes!")
                 return redirect('empresa_novo')
@@ -112,11 +112,15 @@ def empresa_novo(request):
                 return redirect('lista_empresas')
     else:
         form = EmpresasForm
-        return render(request, 'core/empresa_novo.html', {'form':form})
+        localidades = Localidades.objects.all().order_by('cidade')
+        data = {}
+        data['localidades'] = localidades
+        data['form'] = form      
+        return render(request, 'core/empresa_novo.html', data)
     
     
 def empresa_update(request, id):
-    localidade = Empresas.objects.get(id=id)
+    empresa = Empresas.objects.get(id=id)
     form = EmpresasForm(request.POST or None, instance=empresa)
     data={}
     data['empresa'] = empresa

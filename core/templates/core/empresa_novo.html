@@ -3,9 +3,9 @@
 {% block content %}
 
 <div class="titulo">EMPRESAS</div>
-<form name="form" id="form" class="form-horizontal" method="post" action="{% url 'empresa_novo' %}">
+<form name="form" id="form" class="form-horizontal" method="post" action="">
     {% csrf_token %}
-    <div class="form1">
+    <div class="form2">
         <div class="form-group">
             <label class="control-label col-sm-3" for="nome">nome:</label>
             <div class="col-sm-16">
@@ -24,55 +24,50 @@
             </div>
         </br>
 
-        </br>
-        <label class="control-label col-sm-3" for="nome">ie:</label>
-        <div class="col-sm-16">
-            <input type="text" name="ie" maxlength="50" required id="id_ie">
-        </div>
-
         <label class="control-label col-sm-3" for="nome">email:</label>
         <div class="col-sm-16">
-            <input type="email" name="ie" maxlength="50" required id="id_ie">
+            <input type="email" name="email" maxlength="50" required id="id_email">
         </div>
-
+    </br>
 
         <label class="control-label col-sm-3" for="nome">endereço:</label>
         <div class="col-sm-16">
             <input type="text" name="endereco" maxlength="50" required id="id_endereco">
         </div>
 
+    </br>
         <div class="form-group">
             <label class="control-label col-sm-3" for="id_localidade">Localidade:</label>
             <div class="col-sm-8">
-                <select name="localidade" required id="id_localidade" style="width:75%; height:30px; border:#CCC solid 1px;">
-                <option value="" selected >Selecione</option>
-                {% for localidade in localidade %}
-                    <option value="{{ cidade.id }}" >{{ localidade.cidade }}</option>
+                <select name="localidades" required id="id_localidades" required style="width:75%; height:30px; border:#CCC solid 1px;">
+                <option value="0" selected>Selecione</option>
+                {% for localidade in localidades %}
+                    <option value="{{ localidade.id }}" >{{ localidade.cidade }}</option>
                 {% endfor%}
                 </select>
             </div>
         </div>
+    </br>
 
         <label class="control-label col-sm-3" for="nome">Fone:</label>
         <div class="col-sm-16">
             <input type="text" name="fone" maxlength="50" required id="id_fone">
         </div>
+    </br>
 
         <label class="control-label col-sm-3" for="nome">Responsável:</label>
         <div class="col-sm-16">
             <input type="text" name="responsavel" maxlength="50" required id="id_responsavel">
         </div>
 
+    </br>
+
         <label class="control-label col-sm-3" for="nome">Data de início:</label>
         <div class="col-sm-16">
-            <input type="date" name="daa" maxlength="50" required id="id_data_inicio">
+            <input type="date" name="data_inicio" maxlength="50" required id="id_data_inicio">
         </div>
 
-
-</br>
-
-        </div>
-    </div> <!--Final da div form1-->
+</div> <!--Final da div form1-->
 
     <div class="botoes">
         <div class="form-group">
