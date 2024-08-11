@@ -75,14 +75,28 @@ WSGI_APPLICATION = 'siga_transportes.wsgi.application'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
-         'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        # 'default': {
+        #'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        #'NAME': 'siga_transportes',
+        #'USER': 'postgres',
+        #'PASSWORD': 'admin',
+       # 'HOST': 'localhost',
+       # 'PORT': '5432',
+    #}
+
+'default': {
+        'ENGINE': 'django.db.backends.mysql',
         'NAME': 'siga_transportes',
-        'USER': 'postgres',
+        'USER': 'root',
         'PASSWORD': 'admin',
         'HOST': 'localhost',
-        'PORT': '5432',
+        'PORT': '3306',
+        'OPTIONS': {
+            'sql_mode': 'traditional',
+            'autocommit': True
+        }
     }
+
 }
 
 
@@ -128,7 +142,7 @@ LOGIN_REDIRECT_URL = 'home'
 LOGIN_URL = '/accounts/login'
 LOGOUT_REDIRECT_URL = '/accounts/login'
 
-# Default primary key field type
-# https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
+#Default primary key field type
+#https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

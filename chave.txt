@@ -1,0 +1,5 @@
+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
+
+git config --global core.autocrlf false
+
+
