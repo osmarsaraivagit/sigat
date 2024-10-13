@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="titulo">LOCALIDADES - ORIGENS E DESTINOS</div>
+<form name="form" id="form" class="form-horizontal" me  thod="post" action="{% url 'localidade_novo' %}">
+    {% csrf_token %}
+    <div class="form1">
+        <div class="form-group">
+            <label class="control-label col-sm-4" for="id_cidade">Cidade:</label>
+            <div class="col-sm-16">
+                <input type="text" name="cidade" maxlength="50" required id="id_cidade">
+            </div>
+        </br>
+             <div class="form1">
+              <label class="control-label col-sm-3" for="id_estado">Estado:</label>
+            <div class="col-sm-8">
+                <select name="estado_id" required id="id_estado" required style="width:75%; height:30px; border:#CCC solid 1px;">
+                <option value="" selected>Selecione</option>
+                {% for estado in estados %}
+                    <option value="{{ estado.id }}" >{{ estado.estado }}</option>
+                {% endfor%}
+                </select>
+            </div>
+            </div>
+        </br>
+            <div class="form1">
+            <label class="control-label col-sm-3" for="id_pais">Pais:</label>
+            <div class="col-sm-16">
+                <input type="text" name="pais" maxlength="50" required id="id_pais">
+            </div>
+        </br>
+
+        </div>
+    </div> <!--Final da div form1-->
+
+    <div class="botoes">
+        <div class="form-group">
+            <Button type = "submit" class = "btn btn-primary btn-lg">
+                <span class = "glyphicon glyphicon-plus" 
+                style="margin-left: 5px; margin-right: 5px; font-size: 18px; padding-bottom:5px;">Incluir</span>
+            </Button>                
+        </div>
+    </div>
+
+
+    {% if messages %}
+    <div class="alert alert-warning">
+            {% for m in messages %}
+                <p {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ m }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+</form>
+
+{% endblock%}
+

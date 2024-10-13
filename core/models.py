@@ -1,34 +1,75 @@
 from django.db import models
+from django.db.models import CharField
 
 
-class Localidades(models.Model):
-    cidade = models.CharField(max_length=50, blank=False, null=False)
-    estado = models.CharField(max_length=2, blank=False, null=False)
-    pais = models.CharField(max_length=20, blank=False, null=False)
+class Estados(models.Model):
+    nome = models.CharField(max_length=50, blank=False, null=False)
 
     def __str__(self):
-        return self.cidade
+        return self.nome
 
+    class Meta:
+        db_table = 'estados'
+
+class Cidades(models.Model):
+    nome = models.CharField(max_length=50, blank=False, null=False)
+
+    def __str__(self):
+        return self.nome
+
+    class Meta:
+        db_table = 'cidades'
+
+
+class Paises(models.Model):
+    nome = models.CharField(max_length=50, blank=False, null=False)
+
+    def __str__(self):
+        return self.nome
+
+    class Meta:
+        db_table = 'paises'
+
+class Funcoes(models.Model):
+    nome = models.CharField(max_length=50, blank=False, null=False)
+    codigo = models.CharField(max_length=50, blank=False, null=False)
+
+    def __str__(self):
+        return self.nome
+
+    class Meta:
+        db_table = 'funcoes'
+
+
+class Origens(models.Model):
+    fk_cidade = models.ForeignKey('Cidades', on_delete=models.PROTECT)
+    fk_estado = models.ForeignKey('Estados', on_delete=models.PROTECT)
+    fk_pais = models.ForeignKey('Paises', on_delete=models.PROTECT)
 
     class Meta:
 
-        db_table = 'localidades'
+        db_table = 'origens'
 
-
-class AcertosViagens(models.Model):
-    fk_lancar_viagens = models.ForeignKey('LancarViagens', on_delete=models.CASCADE)
-    valor = models.DecimalField(max_digits=11, decimal_places=2, blank=False, null=False)
-    historico = models.CharField(max_length=100, blank=False, null=False)
-    fk_plano_contas = models.ForeignKey('PlanoContas', on_delete=models.CASCADE)
-
-
-    def __str__(self):
-        return self.fk_plano_contas
-
+class Destinos(models.Model):
+    fk_cidade = models.ForeignKey('Cidades', on_delete=models.PROTECT)
+    fk_estado = models.ForeignKey('Estados', on_delete=models.PROTECT)
+    fk_pais = models.ForeignKey('Paises', on_delete=models.PROTECT)
 
     class Meta:
 
-        db_table = 'acertos_viagens'
+        db_table = 'destinos'
+
+
+class FormaPagamento(models.Model):
+
+    tipo = models.CharField(max_length=100, blank=False, null=False)
+
+
+    def __str__(self):
+        return self.tipo
+
+    class Meta:
+        db_table = 'forma_pagamento'
 
 
 class Clientes(models.Model):
@@ -38,8 +79,9 @@ class Clientes(models.Model):
     email = models.CharField(max_length=100, blank=False, null=False)
     endereco = models.CharField(max_length=80, blank=False, null=False)
     telefone = models.CharField(max_length=60, blank=False, null=False)
-    data_cadastro = models.DateField()
-    fk_localidades = models.ForeignKey('localidades', on_delete=models.CASCADE)
+    fk_cidade = models.ForeignKey('Cidades', on_delete=models.PROTECT)
+    fk_estado = models.ForeignKey('Estados', on_delete=models.PROTECT)
+    data_cadastro = models.DateField(null=True, blank=True)
 
     def __str__(self):
         return self.nome
@@ -67,10 +109,11 @@ class Empresas(models.Model):
     ie = models.CharField(max_length=80, blank=False, null=False)
     email = models.CharField(max_length=80, blank=False, null=False)
     endereco = models.CharField(max_length=100, blank=False, null=False)
-    fk_localidades = models.ForeignKey('localidades', on_delete=models.CASCADE)
+    fk_cidade = models.ForeignKey('Cidades', on_delete=models.PROTECT)
+    fk_estado = models.ForeignKey('Estados', on_delete=models.PROTECT)
     fone = models.CharField(max_length=30, blank=False, null=False)
     responsavel = models.CharField(max_length=80, blank=False, null=False)
-    data_inicio = models.DateField()
+    data_inicio = models.DateField(null=True, blank=True)
 
     def __str__(self):
         return self.nome
@@ -89,8 +132,9 @@ class Fornecedores(models.Model):
     endereco = models.CharField(max_length=80, blank=False, null=False)
     fone = models.CharField(max_length=30, blank=False, null=False)
     responsavel = models.CharField(max_length=80, blank=False, null=False)
-    data_cadastro = models.DateField()
-    fk_localidade = models.ForeignKey('localidades', on_delete=models.CASCADE)
+    fk_cidade = models.ForeignKey('Cidades', on_delete=models.PROTECT)
+    fk_estado = models.ForeignKey('Estados', on_delete=models.PROTECT)
+    data_cadastro = models.DateField(null=True, blank=True)
 
     def __str__(self):
         return self.nome
@@ -102,30 +146,42 @@ class Fornecedores(models.Model):
 
 class Frotas(models.Model):
     nome_frota = models.CharField(max_length=20, blank=False, null=False)
-    fk_empresa = models.ForeignKey('Empresas', on_delete=models.CASCADE)
-    fk_situacoes = models.ForeignKey('Situacoes', on_delete=models.CASCADE)
+    fk_empresa = models.ForeignKey('Empresas', on_delete=models.PROTECT)
+    fk_situacoes = models.ForeignKey('Situacoes', on_delete=models.PROTECT)
+    data_cadastro =models.DateField(null=True, blank=True)
 
     def __str__(self):
         return self.nome_frota
 
-
-
     class Meta:
         db_table = 'frotas'
+
+
+class Exames(models.Model):
+    nome = models.CharField(max_length=40, blank=False, null=False)
+    cid = models.CharField(max_length=40, blank=False, null=False)
+   
+    def __str__(self):
+        return self.nome
+
+    class Meta:
+        db_table = 'exames'
 
 
 class Funcionarios(models.Model):
     nome = models.CharField(max_length=80, blank=False, null=False)
     cpf = models.CharField(db_column='CPF', max_length=50, blank=False, null=False)  # Field name made lowercase.
     pis = models.CharField(db_column='PIS', max_length=30, blank=False, null=False)  # Field name made lowercase.
-    data_admissao = models.DateField()
-    data_demissao = models.DateField()
+    data_admissao = models.DateField(null=False, blank=True)
+    data_demissao = models.DateField(null=True, blank=True)
     email = models.CharField(max_length=100, blank=False, null=False)
     endereco = models.CharField(max_length=90, blank=False, null=False)
-    funcao = models.CharField(max_length=60, blank=False, null=False)
+    funcao = models.ForeignKey('funcoes', on_delete=models.PROTECT)
     telefone = models.CharField(max_length=60, blank=False, null=False)
-    fk_localidade = models.ForeignKey('localidades', on_delete=models.CASCADE)
-    fk_situacoes = models.ForeignKey('situacoes', on_delete=models.CASCADE)
+    fk_cidade = models.ForeignKey('Cidades', on_delete=models.PROTECT)
+    fk_estado = models.ForeignKey('Estados', on_delete=models.PROTECT)
+    fk_situacoes = models.ForeignKey('situacoes', on_delete=models.PROTECT)
+    obs = models.CharField(max_length=100, blank=False, null=False)
 
     def __str__(self):
         return self.nome
@@ -136,10 +192,10 @@ class Funcionarios(models.Model):
 
 
 class LancarBaixaVeiculos(models.Model):
-    fk_veiculo = models.ForeignKey('veiculos', on_delete=models.CASCADE)
-    data_venda = models.DateField()
-    km_final = models.IntegerField()
-    valor = models.DecimalField(max_digits=11, decimal_places=2, blank=False, null=False)
+    fk_veiculo = models.ForeignKey('veiculos', on_delete=models.PROTECT)
+    data_venda = models.DateField(null=False, blank=True)
+    km_final = models.IntegerField(null=False, blank=True)
+    valor = models.DecimalField(max_digits=12, decimal_places=2, blank=False, null=False)
     comprador = models.CharField(max_length=60, blank=False, null=False)
     telefone_comprador = models.CharField(max_length=40, blank=False, null=False)
 
@@ -149,25 +205,25 @@ class LancarBaixaVeiculos(models.Model):
 
 
 class LancarContabilidade(models.Model):
-    data = models.DateField()
-    valor = models.DecimalField(max_digits=11, decimal_places=2, blank=False, null=False)
+    data = models.DateField(null=False, blank=True)
+    valor = models.DecimalField(max_digits=12, decimal_places=2, blank=False, null=False)
     historico = models.CharField(max_length=100, blank=False, null=False)
-    fk_plano_contas = models.ForeignKey('PlanoContas', on_delete=models.CASCADE)
-    fk_documento = models.ForeignKey('Documentos', on_delete=models.CASCADE)
-    fk_empresa = models.ForeignKey('Empresas', on_delete=models.CASCADE)
-    fk_fornecedor = models.ForeignKey('Fornecedores', on_delete=models.CASCADE)
-    fk_veiculo = models.ForeignKey('Veiculos', on_delete=models.CASCADE)
+    fk_plano_contas = models.ForeignKey('PlanoContas', on_delete=models.PROTECT)
+    fk_documento = models.ForeignKey('Documentos', on_delete=models.PROTECT)
+    fk_empresa = models.ForeignKey('Empresas', on_delete=models.PROTECT)
+    fk_fornecedor = models.ForeignKey('Fornecedores', on_delete=models.PROTECT)
+    fk_veiculo = models.ForeignKey('Veiculos', on_delete=models.PROTECT)
 
     class Meta:
         db_table = 'lancar_contabilidade'
 
 
 class LancarFerias(models.Model):
-    fk_funcionarios = models.ForeignKey('Funcionarios', on_delete=models.CASCADE)
-    data_inicio = models.DateField()
-    data_fim = models.DateField()
-    ano_referente = models.DateField()
-    valor = models.DecimalField(max_digits=11, decimal_places=2)
+    fk_funcionarios = models.ForeignKey('Funcionarios', on_delete=models.PROTECT)
+    data_inicio = models.DateField(null=False, blank=True)
+    data_fim = models.DateField(null=False, blank=True)
+    ano_referente = models.IntegerField(null=False, blank=True)
+    valor = models.DecimalField(max_digits=12, decimal_places=2)
 
 
     class Meta:
@@ -175,13 +231,15 @@ class LancarFerias(models.Model):
 
 
 class LancarFinanceiroViagens(models.Model):
-    fk_lancar_viagens = models.ForeignKey('LancarViagens', on_delete=models.CASCADE)
-    valor = models.DecimalField(max_digits=11, decimal_places=2, blank=False, null=False)
+    fk_lancar_viagens = models.ForeignKey('LancarViagens', on_delete=models.PROTECT)
+    data = models.DateField(null=False, blank=True)
+    valor = models.DecimalField(max_digits=12, decimal_places=2, blank=False, null=False)
     historico = models.CharField(max_length=100, blank=False, null=False)
-    fk_plano_contas = models.ForeignKey('PlanoContas', on_delete=models.CASCADE)
-    fk_documento = models.ForeignKey('Documentos', on_delete=models.CASCADE)
-    fk_empresa = models.ForeignKey('Empresas', on_delete=models.CASCADE)
-    fk_fornecedor = models.ForeignKey('Fornecedores', on_delete=models.CASCADE)
+    fk_plano_contas = models.ForeignKey('PlanoContas', on_delete=models.PROTECT)
+    fk_documento = models.ForeignKey('Documentos', on_delete=models.PROTECT)
+    fk_empresa = models.ForeignKey('Empresas', on_delete=models.PROTECT)
+    fk_fornecedor = models.ForeignKey('Fornecedores', on_delete=models.PROTECT)
+  
 
     class Meta:
         db_table = 'lancar_financeiro_viagens'
@@ -189,15 +247,17 @@ class LancarFinanceiroViagens(models.Model):
 
 class LancarViagens(models.Model):
     crtc = models.CharField(max_length=30, blank=False, null=False)
-    data = models.DateField()
-    fk_frota = models.ForeignKey('Frotas', on_delete=models.CASCADE)
-    fk_motorista = models.ForeignKey('Funcionarios', on_delete=models.CASCADE)
-    fk_destino = models.ForeignKey('Localidades', on_delete=models.CASCADE)
-    kmfinal = models.IntegerField(db_column='kmFinal')  # Field name made lowercase.
+    data = models.DateField(null=False, blank=True)
+    fk_frota = models.ForeignKey('Frotas', on_delete=models.PROTECT)
+    fk_motorista = models.ForeignKey('Funcionarios', on_delete=models.PROTECT)
+    fk_origem = models.ForeignKey('Origens', on_delete=models.PROTECT)
+    fk_destino = models.ForeignKey('Destinos', on_delete=models.PROTECT)
     kminicial = models.IntegerField(db_column='kmInicial')  # Field name made lowercase.
-    litragem = models.FloatField()
-    qtdeveiculos = models.IntegerField()
-    fk_empresa = models.ForeignKey('Empresas', on_delete=models.CASCADE)
+    litragem = models.FloatField(null=False, blank=True)
+    qtdeveiculos = models.IntegerField(null=False, blank=True)
+    fk_empresa = models.ForeignKey('Empresas', on_delete=models.PROTECT)
+    obs = models.CharField(max_length=100, blank=False, null=False)
+    status = models.CharField(max_length=30, blank=False, null=False)
 
     def __str__(self):
         return self.crtc
@@ -208,12 +268,12 @@ class LancarViagens(models.Model):
 
 
 class PlanoContas(models.Model):
-    conta = models.IntegerField()
+    conta = models.IntegerField(null=False, blank=True)
     tipo = models.CharField(max_length=20, blank=False, null=False)
     descricao = models.CharField(max_length=20, blank=False, null=False)
-    subconta = models.IntegerField()
+    subconta = models.IntegerField(null=False, blank=True)
     sigla_situacao = models.CharField(max_length=1, blank=False, null=False)
-    saldo = models.DecimalField(max_digits=11, decimal_places=2)
+    saldo = models.DecimalField(max_digits=12, decimal_places=2)
 
     def __str__(self):
         return self.conta
@@ -246,20 +306,58 @@ class TiposVeiculos(models.Model):
 
 
 class Veiculos(models.Model):
-    fk_tipo_veiculo = models.ForeignKey('TiposVeiculos', on_delete=models.CASCADE)
+    fk_tipo_veiculo = models.ForeignKey('TiposVeiculos', on_delete=models.PROTECT)
     marca = models.CharField(max_length=80, blank=False, null=False)
     modelo = models.CharField(max_length=80, blank=False, null=False)
+    ano = models.IntegerField(null=False, blank=True)
+    data_fabricacao = models.DateField(null=False, blank=True)
+    renavam = models.IntegerField(null=False, blank=True)
     placas = models.CharField(max_length=80, blank=False, null=False)
-    datacompra = models.DateField(db_column='dataCompra')  # Field name made lowercase.
-    fk_empresa = models.ForeignKey('Empresas', on_delete=models.CASCADE)
-    fk_frota = models.ForeignKey('Frotas', on_delete=models.CASCADE)
+    datacompra = models.DateField('data', null=False, blank=True)  # Field name made lowercase.
+    valor = models.DecimalField(max_digits=12, decimal_places=2)
+    fk_empresa = models.ForeignKey('Empresas', on_delete=models.PROTECT)
+    fk_frota = models.ForeignKey('Frotas', on_delete=models.PROTECT)
     tipo_aquisicao = models.CharField(max_length=50, blank=False, null=False)
-    km_inicial = models.IntegerField()
-    fk_situacoes = models.ForeignKey('situacoes', on_delete=models.CASCADE)
+    km_inicial = models.IntegerField(null=False, blank=True)
+    fk_situacoes = models.ForeignKey('situacoes', on_delete=models.PROTECT)
+    obs = models.CharField(max_length=100, blank=False, null=False)
 
 
     class Meta:
         db_table = 'veiculos'
 
 
+class LancarDocVeiculos(models.Model):
+    nome = models.CharField(max_length=30, blank=False, null=False)
+    data_realizado = models.DateField(null=False, blank=True)
+    data_vencimento = models.DateField(null=False, blank=True)
+    fk_empresa = models.ForeignKey('Empresas', on_delete=models.PROTECT)
+    fk_veiculo = models.ForeignKey('Veiculos', on_delete=models.PROTECT)
+    obs = models.CharField(max_length=100, blank=False, null=False)
+    status = models.CharField(max_length=30, blank=False, null=False)
+
+    def __str__(self):
+        return self.nome
+
+
+    class Meta:
+        db_table = 'lancar_doc_veiculos'
+
+
+class AcertosViagens(models.Model):
+    fk_lancar_viagens = models.ForeignKey('LancarViagens', on_delete=models.PROTECT)
+    data_acerto = models.DateField(null=False, blank=True)
+    km_final = models.IntegerField(null=False, blank=True)
+    valor = models.DecimalField(max_digits=11, decimal_places=2, blank=False, null=False)
+    historico = models.CharField(max_length=100, blank=False, null=False)
+    fk_plano_contas = models.ForeignKey('PlanoContas', on_delete=models.PROTECT)
+    fk_forma_pagamento = models.ForeignKey('FormaPagamento', on_delete=models.PROTECT)
+
+    def __str__(self):
+        return self.data_acerto
+
+
+    class Meta:
+
+        db_table = 'acertos_viagens'
 

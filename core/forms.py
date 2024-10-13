@@ -1,11 +1,33 @@
 from django.forms import ModelForm
-from .models import Localidades, Empresas, Fornecedores, Clientes, Documentos, Frotas, Funcionarios, PlanoContas
+from .models import Origens, Destinos, Empresas, Fornecedores, Clientes, Documentos, Frotas, Funcionarios, PlanoContas
 from .models import Situacoes, AcertosViagens, TiposVeiculos, Veiculos, LancarViagens, LancarFinanceiroViagens
-from .models import LancarFerias, LancarContabilidade, LancarBaixaVeiculos
+from .models import LancarFerias, LancarContabilidade, LancarBaixaVeiculos, Estados, Cidades, Paises
 
-class LocalidadesForm(ModelForm):
+
+class EstadosForm(ModelForm):
     class Meta:
-        model = Localidades
+        model = Estados
+        fields = '__all__'
+
+class CidadesForm(ModelForm):
+    class Meta:
+        model = Cidades
+        fields = '__all__'
+
+
+class PaisesForm(ModelForm):
+    class Meta:
+        model = Paises
+        fields = '__all__'
+
+class OrigensForm(ModelForm):
+    class Meta:
+        model = Origens
+        fields = '__all__'
+
+class DestinosForm(ModelForm):
+    class Meta:
+        model = Destinos
         fields = '__all__'
 
 class EmpresasForm(ModelForm):

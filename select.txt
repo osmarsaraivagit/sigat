@@ -1,0 +1,13 @@
+
+        <div class="form-group">
+            <label class="control-label col-sm-3" for="id_localidade">Localidade:</label>
+            <div class="col-sm-8">
+                <select name="localidades" required id="id_localidades" required style="width:75%; height:30px; border:#CCC solid 1px;">
+                <option value="0" selected>Selecione</option>
+                {% for localidade in localidades %}
+                    <option value="{{ localidade.id }}" >{{ localidade.cidade }}</option>
+                {% endfor%}
+                </select>
+            </div>
+        </div>
+

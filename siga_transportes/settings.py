@@ -75,29 +75,29 @@ WSGI_APPLICATION = 'siga_transportes.wsgi.application'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
-        # 'default': {
+        #'default': {
         #'ENGINE': 'django.db.backends.postgresql_psycopg2',
         #'NAME': 'siga_transportes',
         #'USER': 'postgres',
         #'PASSWORD': 'admin',
-       # 'HOST': 'localhost',
-       # 'PORT': '5432',
+        #'HOST': 'localhost',
+        #'PORT': '5432',
     #}
 
-'default': {
+        'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'siga_transportes',
         'USER': 'root',
         'PASSWORD': 'admin',
-        'HOST': 'localhost',
         'PORT': '3306',
-        'OPTIONS': {
-            'sql_mode': 'traditional',
-            'autocommit': True
+          'sql_mode': 'traditional',
+         'autocommit': True
         }
+        #'default': {
+        #'ENGINE': 'django.db.backends.sqlite3',
+        #'NAME': BASE_DIR / "db.sqlite3",
     }
 
-}
 
 
 # Password validation

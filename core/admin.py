@@ -1,10 +1,14 @@
 from django.contrib import admin
 
-from .models import Localidades, Empresas, Fornecedores, Clientes, Documentos, Frotas, Funcionarios, PlanoContas
+from .models import Origens, Destinos, Empresas, Estados, Cidades, Paises, Fornecedores, Clientes, Documentos, Frotas, Funcionarios, PlanoContas
 from .models import Situacoes, AcertosViagens, TiposVeiculos, Veiculos, LancarViagens, LancarFinanceiroViagens
 from .models import LancarFerias, LancarContabilidade, LancarBaixaVeiculos
 
-admin.site.register(Localidades)
+admin.site.register(Estados)
+admin.site.register(Cidades)
+admin.site.register(Paises)
+admin.site.register(Origens)
+admin.site.register(Destinos)
 admin.site.register(Empresas)
 admin.site.register(Fornecedores)
 admin.site.register(Clientes)
