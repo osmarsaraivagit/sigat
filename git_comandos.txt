@@ -11,3 +11,8 @@ git push -u origin main
 git remote add origin https://github.com/osmarsaraivagit/sigat.git
 git branch -M main
 git push -u origin main
+
+
+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
+
+core.sshCommand="ssh -i ~/.ssh/<sua_chave>"
