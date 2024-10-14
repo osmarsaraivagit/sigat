@@ -16,3 +16,6 @@ git push -u origin main
 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
 
 core.sshCommand="ssh -i ~/.ssh/<sua_chave>"
+
+git checkout main - trocar de branch
+
