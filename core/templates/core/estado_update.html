@@ -2,26 +2,15 @@
 
 {% block content %}
 
-<div class="titulo">LOCALIDADES - ORIGENS E DESTINOS</div>
+<div class="titulo">ESTADOS - UPTADE</div>
 
-<form name="form" id="form" class="form-horizontal" method="post" action="{% url 'localidade_update' localidade.id %}">
+<form name="form" id="form" class="form-horizontal" method="post" action="{% url 'estado_update' estado.id %}">
     {% csrf_token %}
     <div class="form1">
         <div class="form-group">
-            <label class="control-label col-sm-3" for="nome">Cidade:</label>
+            <label class="control-label col-sm-3" for="nome">Nome:</label>
             <div class="col-sm-16">
-                <input type="text" name="cidade" maxlength="50" required id="id.cidade" value="{{ localidade.cidade }}">
-            </div>
-        </br>
-     
-            <label class="control-label col-sm-3" for="nome">Estado:</label>
-            <div class="col-sm-16">
-                <input type="text" name="estado" maxlength="2" required id="id.estado" value="{{ localidade.estado }}">
-            </div>
-        </br>
-            <label class="control-label col-sm-3" for="nome">Pais:</label>
-            <div class="col-sm-16">
-                <input type="text" name="pais" maxlength="50" required id="id.pais" value="{{ localidade.pais }}">
+                <input type="text" name="nome" maxlength="50" required id="id_nome" value="{{ estado.nome }}">
             </div>
         </div>
     </div> <!--Final da div form1-->
@@ -49,10 +38,10 @@
           <h4 class="modal-title">Atenção! Confirma Exclusão?</h4>
         </div>
         <div class="modal-body">
-          <p>O registro {{ localidade.cidade }} será excluído.</p>
+          <p>O registro {{ estado.nome }} será excluído.</p>
         </div>
         <div class="modal-footer">
-     <form name="form2" id="form2" class="form-horizontal" method="post" action="{% url 'localidade_delete' localidade.id %}">
+     <form name="form2" id="form2" class="form-horizontal" method="post" action="{% url 'estado_delete' estado.id %}">
                 {% csrf_token %}
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           <button type="submit" class="btn btn-danger">Confirma</button>

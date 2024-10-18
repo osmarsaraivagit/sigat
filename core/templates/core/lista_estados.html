@@ -1,16 +1,13 @@
 {% extends 'base.html' %}
 
-
 {% block content %}
 
-
-
-<div class="titulo">Empresas</div>
-<form name="form" id="form" class="form-horizontal" method="GET" action="{% url 'localidade_search' %}">
+<div class="titulo">ESTADOS</div>
+<form name="form" id="form" class="form-horizontal" method="GET" action="{% url 'estado_search' %}">
     <div class="form-group row">
-        <label for="nome" class="col-sm-2 col-form-label">Localidade:</label>
+        <label for="nome" class="col-sm-2 col-form-label">Estado:</label>
         <div class="col-sm-8">
-            <input type="text" class="form-control form-control-lg" name="search" id="search" placeholder="Digite a Função para pesquisar">
+            <input type="text" class="form-control form-control-lg" name="search" id="search" placeholder="Digite o Estado para pesquisar">
         </div>
         <div class="col-sm-1">
             <button id="search-btn" type="submit" style="color:#fff" class="btn btn-primary">
@@ -22,16 +19,14 @@
 
     <div class="botoes">
         <div class="form-group">
-            <a href="{% url 'empresa_novo' %}" style="color:#fff" class="btn btn-primary">
+            <a href="{% url 'estado_novo' %}" style="color:#fff" class="btn btn-primary">
             <span class = "glyphicon glyphicon-plus" id="search-btn"
             style="margin-left: 5px; margin-right: 10px; font-size: 18px; padding-bottom:5px;"> Novo
             </span></a>
         </div>
     </div>
 
-   <div>
-
-   {% if messages %}
+    {% if messages %}
     <div class="alert alert-warning">
             {% for m in messages %}
                 <p {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ m }}</p>
@@ -39,48 +34,34 @@
         </div>
     {% endif %}
 
-    <div class="form2">
+    <div class="form">
         <table class="table table-striped table-bordered table-hover">
             <thead>
             <tr>
-                <th>Cidade</th>
-          
-                <th>Estado</th>
-     
-                <th>País</th>
+                <th>NOME DO ESTADO EM SIGLA</th>
+                <th>AÇÕES</th>
 
-                <th>Ações</th>
-        
             </tr>
             </thead>
-            
             <tbody>
-            {% for localidade in localidades %}
+            {% for estado in estado %}
             <tr>
-                <td>{{ localidade.cidade }}</td>
-                <td>{{ localidade.estado }}</td>
-                <td>{{ localidade.pais }}</td>
-
+                <td>{{ estado.nome }}</td>
                 <td style="width:50px; text-align: center;">
-                <a href="{% url 'localidade_update' localidade.id %}" style="color:#fff" class="btn btn-primary">
-                <span class = "glyphicon glyphicon-edit">
-                    
-    
-
+                <a href="{% url 'estado_update' estado.id %}" style="color:#fff" class="btn btn-primary">
+                <span class = "glyphicon glyphicon-edit"
+                style="margin-left: 5px; margin-right: 5px; font-size: 10px; padding-bottom:5px;">
+                </span></a>
+                </td>
             </tr>
             {% endfor %}
-            
-        
-   
+            </tbody>
         </table>
-
-        
-
 </div>
 <div class="pagination">
     <span class="step-links">
-    {% if localidades.has_previous %}
-        <a href="?page={{ localidades.previous_page_number }}">
+    {% if estado.has_previous %}
+        <a href="?page={{ estado.previous_page_number }}">
         <span class = "glyphicon glyphicon-arrow-left"
         style="margin-left: 5px; margin-right: 10px; font-size: 18px; padding-bottom:5px;">
         </span></a>
@@ -88,12 +69,12 @@
     </span>
 
     <span>
-        {{ localidades.number }} de {{ localidades.paginator.num_pages }}
+        {{ estado.number }} de {{ estado.paginator.num_pages }}
     </span>
 
     <span>
-    {% if localidades.has_next %}
-        <a href="?page={{ localidades.next_page_number }}">
+    {% if estado.has_next %}
+        <a href="?page={{ estado.next_page_number }}">
         <span class = "glyphicon glyphicon-arrow-right"
         style="margin-left: 5px; margin-right: 10px; font-size: 18px; padding-bottom:5px;">
         </span></a>
@@ -101,11 +82,5 @@
     </span>
 </div>
 </form>
-</form>
-
 
 {% endblock%}
-
-
-
-

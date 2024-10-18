@@ -1,29 +1,29 @@
 from django.contrib import admin
 
-from .models import Origens, Destinos, Empresas, Estados, Cidades, Paises, Fornecedores, Clientes, Documentos, Frotas, Funcionarios, PlanoContas
-from .models import Situacoes, AcertosViagens, TiposVeiculos, Veiculos, LancarViagens, LancarFinanceiroViagens
-from .models import LancarFerias, LancarContabilidade, LancarBaixaVeiculos
+from .models import Estado, Cidade, Pais, Origem, Destino, Empresa, Fornecedor, Cliente, Documento, Frota, Funcionario, PlanoConta
+from .models import Situacao, AcertoViagem, TipoVeiculo, Veiculo, LancarViagem, LancarFinanceiroViagem
+from .models import LancarFerias, LancarContabilidade, LancarBaixaVeiculo
 
-admin.site.register(Estados)
-admin.site.register(Cidades)
-admin.site.register(Paises)
-admin.site.register(Origens)
-admin.site.register(Destinos)
-admin.site.register(Empresas)
-admin.site.register(Fornecedores)
-admin.site.register(Clientes)
-admin.site.register(Documentos)
-admin.site.register(Frotas)
-admin.site.register(Funcionarios)
-admin.site.register(PlanoContas)
-admin.site.register(Situacoes)
-admin.site.register(AcertosViagens)
-admin.site.register(TiposVeiculos)
-admin.site.register(Veiculos)
-admin.site.register(LancarViagens)
-admin.site.register(LancarFinanceiroViagens)
+admin.site.register(Estado)
+admin.site.register(Cidade)
+admin.site.register(Pais)
+admin.site.register(Origem)
+admin.site.register(Destino)
+admin.site.register(Empresa)
+admin.site.register(Fornecedor)
+admin.site.register(Cliente)
+admin.site.register(Documento)
+admin.site.register(Frota)
+admin.site.register(Funcionario)
+admin.site.register(PlanoConta)
+admin.site.register(Situacao)
+admin.site.register(AcertoViagem)
+admin.site.register(TipoVeiculo)
+admin.site.register(Veiculo)
+admin.site.register(LancarViagem)
+admin.site.register(LancarFinanceiroViagem)
 admin.site.register(LancarFerias)
 admin.site.register(LancarContabilidade)
-admin.site.register(LancarBaixaVeiculos)
+admin.site.register(LancarBaixaVeiculo)
 
 

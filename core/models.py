@@ -2,35 +2,35 @@ from django.db import models
 from django.db.models import CharField
 
 
-class Estados(models.Model):
+class Estado(models.Model):
     nome = models.CharField(max_length=50, blank=False, null=False)
 
     def __str__(self):
         return self.nome
 
     class Meta:
-        db_table = 'estados'
+        db_table = 'estado'
 
-class Cidades(models.Model):
+class Cidade(models.Model):
     nome = models.CharField(max_length=50, blank=False, null=False)
 
     def __str__(self):
         return self.nome
 
     class Meta:
-        db_table = 'cidades'
+        db_table = 'cidade'
 
 
-class Paises(models.Model):
+class Pais(models.Model):
     nome = models.CharField(max_length=50, blank=False, null=False)
 
     def __str__(self):
         return self.nome
 
     class Meta:
-        db_table = 'paises'
+        db_table = 'pais'
 
-class Funcoes(models.Model):
+class Funcao(models.Model):
     nome = models.CharField(max_length=50, blank=False, null=False)
     codigo = models.CharField(max_length=50, blank=False, null=False)
 
@@ -38,26 +38,26 @@ class Funcoes(models.Model):
         return self.nome
 
     class Meta:
-        db_table = 'funcoes'
+        db_table = 'funcao'
 
 
-class Origens(models.Model):
-    fk_cidade = models.ForeignKey('Cidades', on_delete=models.PROTECT)
-    fk_estado = models.ForeignKey('Estados', on_delete=models.PROTECT)
-    fk_pais = models.ForeignKey('Paises', on_delete=models.PROTECT)
-
-    class Meta:
-
-        db_table = 'origens'
-
-class Destinos(models.Model):
-    fk_cidade = models.ForeignKey('Cidades', on_delete=models.PROTECT)
-    fk_estado = models.ForeignKey('Estados', on_delete=models.PROTECT)
-    fk_pais = models.ForeignKey('Paises', on_delete=models.PROTECT)
+class Origem(models.Model):
+    fk_cidade = models.ForeignKey('Cidade', on_delete=models.PROTECT)
+    fk_estado = models.ForeignKey('Estado', on_delete=models.PROTECT)
+    fk_pais = models.ForeignKey('Pais', on_delete=models.PROTECT)
 
     class Meta:
 
-        db_table = 'destinos'
+        db_table = 'origem'
+
+class Destino(models.Model):
+    fk_cidade = models.ForeignKey('Cidade', on_delete=models.PROTECT)
+    fk_estado = models.ForeignKey('Estado', on_delete=models.PROTECT)
+    fk_pais = models.ForeignKey('Pais', on_delete=models.PROTECT)
+
+    class Meta:
+
+        db_table = 'destino'
 
 
 class FormaPagamento(models.Model):
@@ -72,15 +72,15 @@ class FormaPagamento(models.Model):
         db_table = 'forma_pagamento'
 
 
-class Clientes(models.Model):
+class Cliente(models.Model):
     nome = models.CharField(max_length=80, blank=False, null=False)
     cnpj = models.CharField(db_column='CNPJ', max_length=60, blank=False, null=False)  # Field name made lowercase.
     ie = models.CharField(max_length=60, blank=False, null=False)
     email = models.CharField(max_length=100, blank=False, null=False)
     endereco = models.CharField(max_length=80, blank=False, null=False)
     telefone = models.CharField(max_length=60, blank=False, null=False)
-    fk_cidade = models.ForeignKey('Cidades', on_delete=models.PROTECT)
-    fk_estado = models.ForeignKey('Estados', on_delete=models.PROTECT)
+    fk_cidade = models.ForeignKey('Cidade', on_delete=models.PROTECT)
+    fk_estado = models.ForeignKey('Estado', on_delete=models.PROTECT)
     data_cadastro = models.DateField(null=True, blank=True)
 
     def __str__(self):
@@ -89,10 +89,10 @@ class Clientes(models.Model):
 
     class Meta:
 
-        db_table = 'clientes'
+        db_table = 'cliente'
 
 
-class Documentos(models.Model):
+class Documento(models.Model):
     nome_doc = models.CharField(max_length=80, blank=False, null=False)
 
     def __str__(self):
@@ -100,17 +100,17 @@ class Documentos(models.Model):
 
     class Meta:
 
-        db_table = 'documentos'
+        db_table = 'documento'
 
 
-class Empresas(models.Model):
+class Empresa(models.Model):
     nome = models.CharField(max_length=50, blank=False, null=False)
     cnpj = models.CharField(db_column='CNPJ', max_length=80, blank=False, null=False)  # Field name made lowercase.
     ie = models.CharField(max_length=80, blank=False, null=False)
     email = models.CharField(max_length=80, blank=False, null=False)
     endereco = models.CharField(max_length=100, blank=False, null=False)
-    fk_cidade = models.ForeignKey('Cidades', on_delete=models.PROTECT)
-    fk_estado = models.ForeignKey('Estados', on_delete=models.PROTECT)
+    fk_cidade = models.ForeignKey('Cidade', on_delete=models.PROTECT)
+    fk_estado = models.ForeignKey('Estado', on_delete=models.PROTECT)
     fone = models.CharField(max_length=30, blank=False, null=False)
     responsavel = models.CharField(max_length=80, blank=False, null=False)
     data_inicio = models.DateField(null=True, blank=True)
@@ -121,10 +121,10 @@ class Empresas(models.Model):
 
 
     class Meta:
-        db_table = 'empresas'
+        db_table = 'empresa'
 
 
-class Fornecedores(models.Model):
+class Fornecedor(models.Model):
     nome = models.CharField(max_length=80, blank=False, null=False)
     cnpj = models.CharField(db_column='CNPJ', max_length=80, blank=False, null=False)  # Field name made lowercase.
     ie = models.CharField(max_length=80, blank=False, null=False)
@@ -132,8 +132,8 @@ class Fornecedores(models.Model):
     endereco = models.CharField(max_length=80, blank=False, null=False)
     fone = models.CharField(max_length=30, blank=False, null=False)
     responsavel = models.CharField(max_length=80, blank=False, null=False)
-    fk_cidade = models.ForeignKey('Cidades', on_delete=models.PROTECT)
-    fk_estado = models.ForeignKey('Estados', on_delete=models.PROTECT)
+    fk_cidade = models.ForeignKey('Cidade', on_delete=models.PROTECT)
+    fk_estado = models.ForeignKey('Estado', on_delete=models.PROTECT)
     data_cadastro = models.DateField(null=True, blank=True)
 
     def __str__(self):
@@ -141,23 +141,23 @@ class Fornecedores(models.Model):
 
 
     class Meta:
-        db_table = 'fornecedores'
+        db_table = 'fornecedor'
 
 
-class Frotas(models.Model):
+class Frota(models.Model):
     nome_frota = models.CharField(max_length=20, blank=False, null=False)
-    fk_empresa = models.ForeignKey('Empresas', on_delete=models.PROTECT)
-    fk_situacoes = models.ForeignKey('Situacoes', on_delete=models.PROTECT)
+    fk_empresa = models.ForeignKey('Empresa', on_delete=models.PROTECT)
+    fk_situacoes = models.ForeignKey('Situacao', on_delete=models.PROTECT)
     data_cadastro =models.DateField(null=True, blank=True)
 
     def __str__(self):
         return self.nome_frota
 
     class Meta:
-        db_table = 'frotas'
+        db_table = 'frota'
 
 
-class Exames(models.Model):
+class Exame(models.Model):
     nome = models.CharField(max_length=40, blank=False, null=False)
     cid = models.CharField(max_length=40, blank=False, null=False)
    
@@ -165,10 +165,10 @@ class Exames(models.Model):
         return self.nome
 
     class Meta:
-        db_table = 'exames'
+        db_table = 'exame'
 
 
-class Funcionarios(models.Model):
+class Funcionario(models.Model):
     nome = models.CharField(max_length=80, blank=False, null=False)
     cpf = models.CharField(db_column='CPF', max_length=50, blank=False, null=False)  # Field name made lowercase.
     pis = models.CharField(db_column='PIS', max_length=30, blank=False, null=False)  # Field name made lowercase.
@@ -176,11 +176,11 @@ class Funcionarios(models.Model):
     data_demissao = models.DateField(null=True, blank=True)
     email = models.CharField(max_length=100, blank=False, null=False)
     endereco = models.CharField(max_length=90, blank=False, null=False)
-    funcao = models.ForeignKey('funcoes', on_delete=models.PROTECT)
+    fk_funcao = models.ForeignKey('funcao', on_delete=models.PROTECT)
     telefone = models.CharField(max_length=60, blank=False, null=False)
-    fk_cidade = models.ForeignKey('Cidades', on_delete=models.PROTECT)
-    fk_estado = models.ForeignKey('Estados', on_delete=models.PROTECT)
-    fk_situacoes = models.ForeignKey('situacoes', on_delete=models.PROTECT)
+    fk_cidade = models.ForeignKey('Cidade', on_delete=models.PROTECT)
+    fk_estado = models.ForeignKey('Estado', on_delete=models.PROTECT)
+    fk_situacoes = models.ForeignKey('situacao', on_delete=models.PROTECT)
     obs = models.CharField(max_length=100, blank=False, null=False)
 
     def __str__(self):
@@ -188,11 +188,11 @@ class Funcionarios(models.Model):
 
 
     class Meta:
-        db_table = 'funcionarios'
+        db_table = 'funcionario'
 
 
-class LancarBaixaVeiculos(models.Model):
-    fk_veiculo = models.ForeignKey('veiculos', on_delete=models.PROTECT)
+class LancarBaixaVeiculo(models.Model):
+    fk_veiculo = models.ForeignKey('veiculo', on_delete=models.PROTECT)
     data_venda = models.DateField(null=False, blank=True)
     km_final = models.IntegerField(null=False, blank=True)
     valor = models.DecimalField(max_digits=12, decimal_places=2, blank=False, null=False)
@@ -201,25 +201,25 @@ class LancarBaixaVeiculos(models.Model):
 
 
     class Meta:
-        db_table = 'lancar_baixa_veiculos'
+        db_table = 'lancar_baixa_veiculo'
 
 
 class LancarContabilidade(models.Model):
     data = models.DateField(null=False, blank=True)
     valor = models.DecimalField(max_digits=12, decimal_places=2, blank=False, null=False)
     historico = models.CharField(max_length=100, blank=False, null=False)
-    fk_plano_contas = models.ForeignKey('PlanoContas', on_delete=models.PROTECT)
-    fk_documento = models.ForeignKey('Documentos', on_delete=models.PROTECT)
-    fk_empresa = models.ForeignKey('Empresas', on_delete=models.PROTECT)
-    fk_fornecedor = models.ForeignKey('Fornecedores', on_delete=models.PROTECT)
-    fk_veiculo = models.ForeignKey('Veiculos', on_delete=models.PROTECT)
+    fk_plano_conta = models.ForeignKey('PlanoConta', on_delete=models.PROTECT)
+    fk_documento = models.ForeignKey('Documento', on_delete=models.PROTECT)
+    fk_empresa = models.ForeignKey('Empresa', on_delete=models.PROTECT)
+    fk_fornecedor = models.ForeignKey('Fornecedor', on_delete=models.PROTECT)
+    fk_veiculo = models.ForeignKey('Veiculo', on_delete=models.PROTECT)
 
     class Meta:
         db_table = 'lancar_contabilidade'
 
 
 class LancarFerias(models.Model):
-    fk_funcionarios = models.ForeignKey('Funcionarios', on_delete=models.PROTECT)
+    fk_funcionario = models.ForeignKey('Funcionario', on_delete=models.PROTECT)
     data_inicio = models.DateField(null=False, blank=True)
     data_fim = models.DateField(null=False, blank=True)
     ano_referente = models.IntegerField(null=False, blank=True)
@@ -230,32 +230,32 @@ class LancarFerias(models.Model):
         db_table = 'lancar_ferias'
 
 
-class LancarFinanceiroViagens(models.Model):
-    fk_lancar_viagens = models.ForeignKey('LancarViagens', on_delete=models.PROTECT)
+class LancarFinanceiroViagem(models.Model):
+    fk_lancar_viagem = models.ForeignKey('LancarViagem', on_delete=models.PROTECT)
     data = models.DateField(null=False, blank=True)
     valor = models.DecimalField(max_digits=12, decimal_places=2, blank=False, null=False)
     historico = models.CharField(max_length=100, blank=False, null=False)
-    fk_plano_contas = models.ForeignKey('PlanoContas', on_delete=models.PROTECT)
-    fk_documento = models.ForeignKey('Documentos', on_delete=models.PROTECT)
-    fk_empresa = models.ForeignKey('Empresas', on_delete=models.PROTECT)
-    fk_fornecedor = models.ForeignKey('Fornecedores', on_delete=models.PROTECT)
+    fk_plano_conta = models.ForeignKey('PlanoConta', on_delete=models.PROTECT)
+    fk_documento = models.ForeignKey('Documento', on_delete=models.PROTECT)
+    fk_empresa = models.ForeignKey('Empresa', on_delete=models.PROTECT)
+    fk_fornecedor = models.ForeignKey('Fornecedor', on_delete=models.PROTECT)
   
 
     class Meta:
-        db_table = 'lancar_financeiro_viagens'
+        db_table = 'lancar_financeiro_viagem'
 
 
-class LancarViagens(models.Model):
+class LancarViagem(models.Model):
     crtc = models.CharField(max_length=30, blank=False, null=False)
     data = models.DateField(null=False, blank=True)
-    fk_frota = models.ForeignKey('Frotas', on_delete=models.PROTECT)
-    fk_motorista = models.ForeignKey('Funcionarios', on_delete=models.PROTECT)
-    fk_origem = models.ForeignKey('Origens', on_delete=models.PROTECT)
-    fk_destino = models.ForeignKey('Destinos', on_delete=models.PROTECT)
+    fk_frota = models.ForeignKey('Frota', on_delete=models.PROTECT)
+    fk_motorista = models.ForeignKey('Funcionario', on_delete=models.PROTECT)
+    fk_origem = models.ForeignKey('Origem', on_delete=models.PROTECT)
+    fk_destino = models.ForeignKey('Destino', on_delete=models.PROTECT)
     kminicial = models.IntegerField(db_column='kmInicial')  # Field name made lowercase.
     litragem = models.FloatField(null=False, blank=True)
     qtdeveiculos = models.IntegerField(null=False, blank=True)
-    fk_empresa = models.ForeignKey('Empresas', on_delete=models.PROTECT)
+    fk_empresa = models.ForeignKey('Empresa', on_delete=models.PROTECT)
     obs = models.CharField(max_length=100, blank=False, null=False)
     status = models.CharField(max_length=30, blank=False, null=False)
 
@@ -264,10 +264,10 @@ class LancarViagens(models.Model):
 
 
     class Meta:
-        db_table = 'lancar_viagens'
+        db_table = 'lancar_viagem'
 
 
-class PlanoContas(models.Model):
+class PlanoConta(models.Model):
     conta = models.IntegerField(null=False, blank=True)
     tipo = models.CharField(max_length=20, blank=False, null=False)
     descricao = models.CharField(max_length=20, blank=False, null=False)
@@ -282,31 +282,31 @@ class PlanoContas(models.Model):
         return self.descricao
 
     class Meta:
-        db_table = 'plano_contas'
+        db_table = 'plano_conta'
 
 
-class Situacoes(models.Model):
+class Situacao(models.Model):
     tipo_nome = models.CharField(max_length=20)
 
     def __str__(self):
         return self.tipo_nome
 
     class Meta:
-        db_table = 'situacoes'
+        db_table = 'situacao'
 
 
-class TiposVeiculos(models.Model):
-    tipo_de_veiculo = models.CharField(max_length=30, blank=False, null=False)
+class TipoVeiculo(models.Model):
+    tipo_veiculo = models.CharField(max_length=30, blank=False, null=False)
 
     def __str__(self):
-        return self.tipo_de_veiculo
+        return self.tipo_veiculo
 
     class Meta:
-        db_table = 'tipos_veiculos'
+        db_table = 'tipo_veiculo'
 
 
-class Veiculos(models.Model):
-    fk_tipo_veiculo = models.ForeignKey('TiposVeiculos', on_delete=models.PROTECT)
+class Veiculo(models.Model):
+    fk_tipo_veiculo = models.ForeignKey('TipoVeiculo', on_delete=models.PROTECT)
     marca = models.CharField(max_length=80, blank=False, null=False)
     modelo = models.CharField(max_length=80, blank=False, null=False)
     ano = models.IntegerField(null=False, blank=True)
@@ -315,24 +315,24 @@ class Veiculos(models.Model):
     placas = models.CharField(max_length=80, blank=False, null=False)
     datacompra = models.DateField('data', null=False, blank=True)  # Field name made lowercase.
     valor = models.DecimalField(max_digits=12, decimal_places=2)
-    fk_empresa = models.ForeignKey('Empresas', on_delete=models.PROTECT)
-    fk_frota = models.ForeignKey('Frotas', on_delete=models.PROTECT)
+    fk_empresa = models.ForeignKey('Empresa', on_delete=models.PROTECT)
+    fk_frota = models.ForeignKey('Frota', on_delete=models.PROTECT)
     tipo_aquisicao = models.CharField(max_length=50, blank=False, null=False)
     km_inicial = models.IntegerField(null=False, blank=True)
-    fk_situacoes = models.ForeignKey('situacoes', on_delete=models.PROTECT)
+    fk_situacoes = models.ForeignKey('situacao', on_delete=models.PROTECT)
     obs = models.CharField(max_length=100, blank=False, null=False)
 
 
     class Meta:
-        db_table = 'veiculos'
+        db_table = 'veiculo'
 
 
-class LancarDocVeiculos(models.Model):
+class LancarDocVeiculo(models.Model):
     nome = models.CharField(max_length=30, blank=False, null=False)
     data_realizado = models.DateField(null=False, blank=True)
     data_vencimento = models.DateField(null=False, blank=True)
-    fk_empresa = models.ForeignKey('Empresas', on_delete=models.PROTECT)
-    fk_veiculo = models.ForeignKey('Veiculos', on_delete=models.PROTECT)
+    fk_empresa = models.ForeignKey('Empresa', on_delete=models.PROTECT)
+    fk_veiculo = models.ForeignKey('Veiculo', on_delete=models.PROTECT)
     obs = models.CharField(max_length=100, blank=False, null=False)
     status = models.CharField(max_length=30, blank=False, null=False)
 
@@ -341,16 +341,16 @@ class LancarDocVeiculos(models.Model):
 
 
     class Meta:
-        db_table = 'lancar_doc_veiculos'
+        db_table = 'lancar_doc_veiculo'
 
 
-class AcertosViagens(models.Model):
-    fk_lancar_viagens = models.ForeignKey('LancarViagens', on_delete=models.PROTECT)
+class AcertoViagem(models.Model):
+    fk_lancar_viagem = models.ForeignKey('LancarViagem', on_delete=models.PROTECT)
     data_acerto = models.DateField(null=False, blank=True)
     km_final = models.IntegerField(null=False, blank=True)
     valor = models.DecimalField(max_digits=11, decimal_places=2, blank=False, null=False)
     historico = models.CharField(max_length=100, blank=False, null=False)
-    fk_plano_contas = models.ForeignKey('PlanoContas', on_delete=models.PROTECT)
+    fk_plano_conta = models.ForeignKey('PlanoConta', on_delete=models.PROTECT)
     fk_forma_pagamento = models.ForeignKey('FormaPagamento', on_delete=models.PROTECT)
 
     def __str__(self):
@@ -359,5 +359,5 @@ class AcertosViagens(models.Model):
 
     class Meta:
 
-        db_table = 'acertos_viagens'
+        db_table = 'acerto_viagem'
 

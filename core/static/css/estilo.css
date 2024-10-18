@@ -1,27 +1,25 @@
 label{ text-align:right; padding-top: 5px;}
 input{
     border: 1px solid #ccc; padding-top: 5px;
-
 }
 
-.topo{ color:darkblue; margin:auto; text-align: center; }
+.topo{ color:darkblue; margin:auto; text-align: center;}
 
 #corpo{ background-color:#fff; width: 400px; height: 220px; margin: auto;
     text-align: center;}
 
-#title{ background-color:#163550; color: #ffffff; width: 400px;
+#title{ background-color:#163550; color: #fff; width: 400px; 
     height: 40px; margin: auto; margin-bottom: 20px; text-align: center; padding-top: 8px; font-size: 16px;}
 
 #corpo2{ min-height: 600px;}
 
 .form1{
     background-color:#e6f2ff; width:550px; height:110px; margin:auto; border:solid #CCC 1px;
-    margin-top:30px; padding-top:40px; 
+    margin-top:30px; padding-top:40px;
+
 }
 
-.form2{
-    background-color:#e6f2ff; width:550px; height:160px; margin:auto; border:solid #CCC 1px;
-    margin-top:30px; padding-top:40px; 
+
 }
 .botoes{ 
     width:100%; margin:auto; margin-top:10px; margin-bottom:10px; margin-left: 20px;
@@ -76,16 +74,10 @@ input{
 
 /* Comandos para o Rodapé*/
 footer{ 
-    background-color: #ffffff; height: 50px; padding-top: 7px; padding-left: 20px;
+    background-color: #0069d9; height: 50px; padding-top: 7px; padding-left: 20px; 
     color: #fff; margin-top: 30px;
 }
 footer h4{
     color: #fff; font-weight: bold;
 }
-maiscula{
- text-transform: uppercase;
-}
-
-
-
     

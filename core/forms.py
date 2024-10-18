@@ -1,98 +1,98 @@
 from django.forms import ModelForm
-from .models import Origens, Destinos, Empresas, Fornecedores, Clientes, Documentos, Frotas, Funcionarios, PlanoContas
-from .models import Situacoes, AcertosViagens, TiposVeiculos, Veiculos, LancarViagens, LancarFinanceiroViagens
-from .models import LancarFerias, LancarContabilidade, LancarBaixaVeiculos, Estados, Cidades, Paises
+from .models import Origem, Destino, Empresa, Fornecedor, Cliente, Documento, Frota, Funcionario, PlanoConta
+from .models import Situacao, AcertoViagem, TipoVeiculo, Veiculo, LancarViagem, LancarFinanceiroViagem
+from .models import LancarFerias, LancarContabilidade, LancarBaixaVeiculo, Estado, Cidade, Pais
 
 
-class EstadosForm(ModelForm):
+class EstadoForm(ModelForm):
     class Meta:
-        model = Estados
+        model = Estado
         fields = '__all__'
 
-class CidadesForm(ModelForm):
+class CidadeForm(ModelForm):
     class Meta:
-        model = Cidades
+        model = Cidade
         fields = '__all__'
 
 
-class PaisesForm(ModelForm):
+class PaisForm(ModelForm):
     class Meta:
-        model = Paises
+        model = Pais
         fields = '__all__'
 
-class OrigensForm(ModelForm):
+class OrigemForm(ModelForm):
     class Meta:
-        model = Origens
+        model = Origem
         fields = '__all__'
 
-class DestinosForm(ModelForm):
+class DestinoForm(ModelForm):
     class Meta:
-        model = Destinos
+        model = Destino
         fields = '__all__'
 
-class EmpresasForm(ModelForm):
+class EmpresaForm(ModelForm):
     class Meta:
-        model = Empresas
+        model = Empresa
         fields = '__all__'
 
-class FornecedoresForm(ModelForm):
+class FornecedorForm(ModelForm):
     class Meta:
-        model = Fornecedores
+        model = Fornecedor
         fields = '__all__'
 
-class ClientesForm(ModelForm):
+class ClienteForm(ModelForm):
     class Meta:
-        model = Clientes
+        model = Cliente
         fields = '__all__'
 
-class DocumentosForm(ModelForm):
+class DocumentoForm(ModelForm):
     class Meta:
-        model = Documentos
+        model = Documento
         fields = '__all__'
 
-class FrotasForm(ModelForm):
+class FrotaForm(ModelForm):
     class Meta:
-        model = Frotas
+        model = Frota
         fields = '__all__'
 
-class FuncionariosForm(ModelForm):
+class FuncionarioForm(ModelForm):
     class Meta:
-        model = Funcionarios
+        model = Funcionario
         fields = '__all__'
 
 class PlanoContasForm(ModelForm):
     class Meta:
-        model = PlanoContas
+        model = PlanoConta
         fields = '__all__'
 
-class SituacoesForm(ModelForm):
+class SituacaoForm(ModelForm):
     class Meta:
-        model = Situacoes
+        model = Situacao
         fields = '__all__'
 
-class AcertosViagensForm(ModelForm):
+class AcertoViagemForm(ModelForm):
     class Meta:
-        model = AcertosViagens
+        model = AcertoViagem
         fields = '__all__'
 
-class TiposVeiculosForm(ModelForm):
+class TipoVeiculoForm(ModelForm):
     class Meta:
-        model = TiposVeiculos
+        model = TipoVeiculo
         fields = '__all__'
 
-class VeiculosForm(ModelForm):
+class VeiculoForm(ModelForm):
     class Meta:
-        model = Veiculos
+        model = Veiculo
         fields = '__all__'
 
-class lancarViagensForm(ModelForm):
+class lancarViagemForm(ModelForm):
     class Meta:
-        model = LancarViagens
+        model = LancarViagem
         fields = '__all__'
 
-class LancarFinanceiroViagensForm(ModelForm):
+class LancarFinanceiroViagemForm(ModelForm):
     class Meta:
-        model = LancarFinanceiroViagens
+        model = LancarFinanceiroViagem
         fields = '__all__'
 
 class LancarFeriasForm(ModelForm):
@@ -105,8 +105,8 @@ class LancarContabilidadeForm(ModelForm):
         model = LancarContabilidade
         fields = '__all__'
 
-class LancarBaixaVeiculosForm(ModelForm):
+class LancarBaixaVeiculoForm(ModelForm):
     class Meta:
-        model = LancarBaixaVeiculos
+        model = LancarBaixaVeiculo
         fields = '__all__'
 
