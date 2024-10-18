@@ -10,7 +10,7 @@
             <input type="text" class="form-control form-control-lg" name="search" id="search" placeholder="Digite o Estado para pesquisar">
         </div>
         <div class="col-sm-1">
-            <button id="search-btn" type="submit" style="color:#fff" class="btn btn-primary">
+            <button id="search-btn" title="Procurar" type="submit" style="color:#fff" class="btn btn-primary">
             <span class = "glyphicon glyphicon-search"
             style="margin-left:5px; font-size: 12px; padding-bottom:5px;">
             </span></Button>
@@ -38,7 +38,7 @@
         <table class="table table-striped table-bordered table-hover">
             <thead>
             <tr>
-                <th>NOME DO ESTADO EM SIGLA</th>
+                <th>NOME DO ESTADO</th>
                 <th>AÇÕES</th>
 
             </tr>
@@ -48,7 +48,7 @@
             <tr>
                 <td>{{ estado.nome }}</td>
                 <td style="width:50px; text-align: center;">
-                <a href="{% url 'estado_update' estado.id %}" style="color:#fff" class="btn btn-primary">
+                <a href="{% url 'estado_update' estado.id %}" title="Editar e Excluir o registro" style="color:#fff" class="btn btn-primary">
                 <span class = "glyphicon glyphicon-edit"
                 style="margin-left: 5px; margin-right: 5px; font-size: 10px; padding-bottom:5px;">
                 </span></a>

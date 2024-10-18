@@ -23,6 +23,16 @@
         </div>
     </div>
 
+    <div class="d-grid gap-2 d-md-block">
+    <a href="{% url 'lista_estados' %}"
+    <Button  type= "button" class = "btn btn-warning"  style="float:right; margin-top:-66px;">
+        <span class = "glyphicon glyphicon-arrow-left"
+        style="margin-left: 5px; margin-right: 10px; font-size: 18px; padding-bottom:5px;"> Voltar</span>
+    </Button>
+    </a>
+    </div>
+
+
     {% if messages %}
     <div class="alert alert-warning">
             {% for m in messages %}

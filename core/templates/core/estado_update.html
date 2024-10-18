@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<div class="titulo">ESTADOS - UPTADE</div>
+<div class="titulo">ESTADOS - ATUALIZAÇÃO</div>
 
 <form name="form" id="form" class="form-horizontal" method="post" action="{% url 'estado_update' estado.id %}">
     {% csrf_token %}
@@ -43,7 +43,7 @@
         <div class="modal-footer">
      <form name="form2" id="form2" class="form-horizontal" method="post" action="{% url 'estado_delete' estado.id %}">
                 {% csrf_token %}
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
           <button type="submit" class="btn btn-danger">Confirma</button>
         </div>
       </div>
@@ -54,18 +54,16 @@
 </form>
 
 
+
 <div class="d-grid gap-2 d-md-block"> 
     <a href=""
     <Button  type= "submit" class = "btn btn-danger btn-lg" data-toggle="modal" data-target="#myModal" style="float:right; margin-top:-66px;">
         <span class = "glyphicon glyphicon-trash"
         style="margin-left: 5px; margin-right: 10px; font-size: 18px; padding-bottom:5px;"> Excluir</span>
     </Button>       
-    </a>         
+    </a>
+
 </div>
-
-
-
-
 
 
 
