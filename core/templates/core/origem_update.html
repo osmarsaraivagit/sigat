@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="titulo">ORIGENS - ATUALIZAÇÃO</div>
+
+<form name="form" id="form" class="form-horizontal" method="post" action="{% url 'origem_update' origem.id %}">
+    {% csrf_token %}
+    <div class="form3">
+        <div class="form-group">
+            <label class="control-label col-sm-3" for="cidade_id">Cidade:</label>
+            <div class="col-sm-8">
+                <select name="cidade_id" required id="cidade_id" style="width:75%; height:30px; border:#CCC solid 1px;">
+                <option value="" selected >Selecione</option>
+                {% for cidade in cidades %}
+                    {% if origem.cidade_id == cidade.id %}
+                          <option value="{{ cidade.id }}" selected >{{ cidade.nome }}</option>
+                    {% else %}
+                          <option value="{{ cidade.id }}" >{{ cidade.nome }}</option>
+                    {% endif %}
+                {% endfor%}
+                </select>
+            </div>
+        </div>
+         <div class="form-group">
+            <label class="control-label col-sm-3" for="estado_id">Estado:</label>
+            <div class="col-sm-8">
+                <select name="estado_id" required id="estado_id" style="width:75%; height:30px; border:#CCC solid 1px;">
+                <option value="" selected >Selecione</option>
+                {% for estado in estados %}
+                    {% if origem.estado_id == estado.id %}
+                          <option value="{{ estado.id }}" selected >{{ estado.nome }}</option>
+                    {% else %}
+                          <option value="{{ estado.id }}" >{{ estado.nome }}</option>
+                    {% endif %}
+                {% endfor%}
+                </select>
+            </div>
+         </div>
+
+            <div class="form-group">
+            <label class="control-label col-sm-3" for="pais_id">Setor:</label>
+            <div class="col-sm-8">
+                <select name="pais_id" required id="pais_id" style="width:75%; height:30px; border:#CCC solid 1px;">
+                <option value="" selected >Selecione</option>
+                {% for pais in paises %}
+                    {% if origem.pais_id == pais.id %}
+                          <option value="{{ pais.id }}" selected >{{ pais.nome }}</option>
+                    {% else %}
+                          <option value="{{ pais.id }}" >{{ pais.nome }}</option>
+                    {% endif %}
+                {% endfor%}
+                </select>
+            </div>
+        </div>
+    </div>
+
+    </br>
+</br>
+    </br>
+</br>
+
+    <div class="botoes">
+        <div class="container">
+            <div class="row">
+              <div class="col">
+        <div class="form-group">
+            <Button type = "submit" class = "btn btn-primary btn-lg">
+                <span class = "glyphicon glyphicon-edit"
+                style="margin-left: 5px; margin-right: 5px; font-size: 18px; padding-bottom:5px;"> Alterar</span>
+            </Button>
+        </div>
+        <div>
+
+            {% if messages %}
+    <div class="alert alert-warning">
+            {% for m in messages %}
+                <p {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ m }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+
+</form>
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Atenção! Confirma Exclusão?</h4>
+        </div>
+        <div class="modal-body">
+          <p>O registro {{ origem.cidade.nome }} será excluído.</p>
+        </div>
+        <div class="modal-footer">
+     <form name="form2" id="form2" class="form-horizontal" method="post" action="{% url 'origem_delete' origem.id %}">
+                {% csrf_token %}
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-danger">Confirma</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<div class="d-grid gap-2 d-md-block"> 
+    <a href=""
+    <Button  type= "submit" class = "btn btn-danger btn-lg" data-toggle="modal" data-target="#myModal" style="float:right; margin-top:-66px;">
+        <span class = "glyphicon glyphicon-trash"
+        style="margin-left: 5px; margin-right: 10px; font-size: 18px; padding-bottom:5px;"> Excluir</span>
+    </Button>       
+    </a>
+
+</div>
+
+
+
+{% endblock %}

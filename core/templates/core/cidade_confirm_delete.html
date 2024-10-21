@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<form name="form2" id="form2" class="form-horizontal" method="post" action="{% url 'estado_delete' estado.id %}">
+<form name="form2" id="form2" class="form-horizontal" method="post" action="{% url 'cidade_delete' cidade.id %}">
   {% csrf_token %}
     <div id="myModal" class="modal fade" role="dialog">
         <div class="modal-dialog">
@@ -15,7 +15,7 @@
             </div>
             <div class="modal-body">
                
-    Você tem certeza que deseja excluir o registro:{{ estado.nome }}<b></b>?
+    Você tem certeza que deseja excluir o registro:{{ cidade.nome }}<b></b>?
              
             </div>
             <div class="modal-footer">

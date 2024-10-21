@@ -65,6 +65,7 @@ class PlanoContasForm(ModelForm):
         model = PlanoConta
         fields = '__all__'
 
+
 class SituacaoForm(ModelForm):
     class Meta:
         model = Situacao

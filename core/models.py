@@ -42,9 +42,9 @@ class Funcao(models.Model):
 
 
 class Origem(models.Model):
-    fk_cidade = models.ForeignKey('Cidade', on_delete=models.PROTECT)
-    fk_estado = models.ForeignKey('Estado', on_delete=models.PROTECT)
-    fk_pais = models.ForeignKey('Pais', on_delete=models.PROTECT)
+    cidade = models.ForeignKey('Cidade', on_delete=models.PROTECT)
+    estado = models.ForeignKey('Estado', on_delete=models.PROTECT)
+    pais = models.ForeignKey('Pais', on_delete=models.PROTECT)
 
     class Meta:
 
@@ -176,7 +176,7 @@ class Funcionario(models.Model):
     data_demissao = models.DateField(null=True, blank=True)
     email = models.CharField(max_length=100, blank=False, null=False)
     endereco = models.CharField(max_length=90, blank=False, null=False)
-    fk_funcao = models.ForeignKey('funcao', on_delete=models.PROTECT)
+    fk_funcao = models.ForeignKey('Funcao', on_delete=models.PROTECT)
     telefone = models.CharField(max_length=60, blank=False, null=False)
     fk_cidade = models.ForeignKey('Cidade', on_delete=models.PROTECT)
     fk_estado = models.ForeignKey('Estado', on_delete=models.PROTECT)
