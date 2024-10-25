@@ -10,7 +10,7 @@
         <div class="form-group">
             <label class="control-label col-sm-3" for="nome">Nome:</label>
             <div class="col-sm-16">
-                <input type="text" name="nome" maxlength="50" required id="id_nome" value="{{ cidade.nome }}">
+                <input type="text" name="nome" maxlength="40" required id="id_nome" oninput="handleInput(event)" value="{{ cidade.nome }}">
             </div>
         </div>
     </div> <!--Final da div form1-->

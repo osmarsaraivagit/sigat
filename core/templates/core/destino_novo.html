@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="titulo" xmlns="http://www.w3.org/1999/html">DESTINO</div>
+<form name="form" id="form" class="form-horizontal" method="post" action="">
+    {% csrf_token %}
+    <div class="form3">
+
+        <div class="form-group">
+            <label class="control-label col-sm-3" for="cidade_id">Cidade:</label>
+            <div class="col-sm-8">
+                <select name="cidade_id" required id="cidade_id" style="width:75%; height:30px; border:#CCC solid 1px;">
+                <option value="" selected >Selecione</option>
+                {% for cidade in cidades %}
+                    <option value="{{ cidade.id }}" >{{ cidade.nome }}</option>
+                {% endfor%}
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-sm-3" for="estado_id">Estado:</label>
+            <div class="col-sm-8">
+                <select name="estado_id" required id="estado_id" style="width:75%; height:30px; border:#CCC solid 1px;">
+                <option value="" selected >Selecione</option>
+                {% for estado in estados %}
+                    <option value="{{ estado.id }}" >{{ estado.nome }}</option>
+                {% endfor%}
+                </select>
+
+            </div>
+        </div>
+
+      <div class="form-group">
+            <label class="control-label col-sm-3" for="pais_id">País:</label>
+            <div class="col-sm-8">
+                <select name="pais_id" required id="pais_id" style="width:75%; height:30px; border:#CCC solid 1px;">
+                <option value="" selected >Selecione</option>
+                {% for pais in paises %}
+                    <option value="{{ pais.id }}" >{{ pais.nome }}</option>
+                {% endfor%}
+                </select>
+            </div>
+      </div>
+
+  </div>
+          </br>
+    </br>
+         </br>
+
+    <div class="botoes">
+        <div class="form-group">
+            <Button type = "submit" class = "btn btn-primary btn-lg" >
+                <span class = "glyphicon glyphicon-plus"
+                style="margin-left: 5px; margin-right: 10px; font-size: 18px; padding-bottom:5px;"> Incluir</span>
+            </Button>
+        </div>
+    </div>
+
+          <div class="d-grid gap-2 d-md-block">
+    <a href="{% url 'lista_destinos' %}"
+    <Button  type= "button" class = "btn btn-warning"  style="float:right; margin-top:-66px;">
+        <span class = "glyphicon glyphicon-arrow-left"
+        style="margin-left: 10px; margin-right: 10px; font-size: 18px; padding-bottom:15px;"> Voltar</span>
+    </Button>
+    </a>
+    </div>
+
+    </br>
+          </br>
+
+    {% if messages %}
+    <div class="alert alert-warning">
+            {% for m in messages %}
+                <p {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ m }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+</form>
+
+{% endblock%}

@@ -2,12 +2,12 @@
 
 {% block content %}
 
-<div class="titulo">ORIGENS</div>
+<div class="titulo">DESTINOS</div>
 
 
     <div class="botoes">
         <div class="form-group">
-            <a href="{% url 'origem_novo' %}" style="color:#fff" class="btn btn-primary">
+            <a href="{% url 'destino_novo' %}" style="color:#fff" class="btn btn-primary">
             <span class = "glyphicon glyphicon-plus" id="search-btn"
             style="margin-left: 5px; margin-right: 10px; font-size: 18px; padding-bottom:5px;"> Novo
             </span></a>
@@ -34,13 +34,13 @@
             </tr>
             </thead>
             <tbody>
-            {% for origem in origens %}
+            {% for destino in destinos %}
             <tr>
-                <td>{{ origem.cidade.nome }}</td>
-                <td>{{ origem.estado.nome }}</td>
-                <td>{{ origem.pais.nome }}</td>
+                <td>{{ destino.cidade.nome }}</td>
+                <td>{{ destino.estado.nome }}</td>
+                <td>{{ destino.pais.nome }}</td>
                 <td style="width:50px; text-align: center;">
-                <a href="{% url 'origem_update' origem.id %}" title="Editar e Excluir o registro" style="color:#fff" class="btn btn-primary">
+                <a href="{% url 'destino_update' destino.id %}" title="Editar e Excluir o registro" style="color:#fff" class="btn btn-primary">
                 <span class = "glyphicon glyphicon-edit"
                 style="margin-left: 5px; margin-right: 5px; font-size: 10px; padding-bottom:5px;">
                 </span></a>
@@ -52,8 +52,8 @@
 </div>
 <div class="pagination">
     <span class="step-links">
-    {% if origens.has_previous %}
-        <a href="?page={{ origens.previous_page_number }}">
+    {% if destinos.has_previous %}
+        <a href="?page={{ destinos.previous_page_number }}">
         <span class = "glyphicon glyphicon-arrow-left"
         style="margin-left: 5px; margin-right: 10px; font-size: 18px; padding-bottom:5px;">
         </span></a>
@@ -61,12 +61,12 @@
     </span>
 
     <span>
-        {{ origens.number }} de {{ origens.paginator.num_pages }}
+        {{ destinos.number }} de {{ destinos.paginator.num_pages }}
     </span>
 
     <span>
-    {% if origens.has_next %}
-        <a href="?page={{ origens.next_page_number }}">
+    {% if destinos.has_next %}
+        <a href="?page={{ destinos.next_page_number }}">
         <span class = "glyphicon glyphicon-arrow-right"
         style="margin-left: 5px; margin-right: 10px; font-size: 18px; padding-bottom:5px;">
         </span></a>

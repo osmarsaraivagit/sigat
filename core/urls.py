@@ -3,7 +3,8 @@ from django.urls import path
 from .views import home, lista_estados, estado_novo, estado_search, estado_update, estado_delete
 from .views import lista_cidades, cidade_novo, cidade_search, cidade_update, cidade_delete
 from .views import lista_paises, pais_novo, pais_search, pais_update, pais_delete
-from .views import lista_origens, origem_novo, origem_search, origem_update, origem_delete
+from .views import lista_origens, origem_novo, origem_update, origem_delete
+from .views import lista_destinos, destino_novo, destino_delete, destino_update
 
 urlpatterns = [
 
@@ -41,8 +42,12 @@ urlpatterns = [
     path('origem_novo', origem_novo, name='origem_novo'),
     path('origem_update/<int:id>', origem_update, name='origem_update'),
     path('origem_delete/<int:id>', origem_delete, name='origem_delete'),
-    path('origem_search', origem_search, name='origem_search'),
 
+#DESTINOS
+    path('lista_destinos', lista_destinos, name='lista_destinos'),
+    path('destino_novo', destino_novo, name='destino_novo'),
+    path('destino_update/<int:id>', destino_update, name='destino_update'),
+    path('destino_delete/<int:id>', destino_delete, name='destino_delete'),
 
 ]
 

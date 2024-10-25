@@ -2,8 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.http import HttpResponse, HttpRequest
 from django.core.paginator import Paginator
-from .models import Estado, Cidade, Pais, Origem
-from .forms import EstadoForm, CidadeForm, PaisForm, OrigemForm
+from .models import Estado, Cidade, Pais, Origem, Destino
+from .forms import EstadoForm, CidadeForm, PaisForm, OrigemForm, DestinoForm
 
 
 # Create your views here.
@@ -229,9 +229,6 @@ def origem_novo(request):
 
 def origem_update(request, id):
     origem = Origem.objects.get(id=id)
-    cidade_id = origem.cidade_id
-    estado_id = origem.estado_id
-    pais_id = origem.pais_id
     cidades = Cidade.objects.all().order_by('nome')
     estados = Estado.objects.all().order_by('nome')
     paises = Pais.objects.all().order_by('nome')
@@ -259,12 +256,67 @@ def origem_delete(request, id):
     return render(request, 'core/lista_origens.html', {'origens': origens})
 
 
-def origem_search(request):
-    search = request.GET.get('search')
-    origem = Origem.objects.filter(cidade_id=2)
-    form = OrigemForm()
+#DESTINOS
+
+def lista_destinos(request):
+    destinos_list = Destino.objects.all().order_by('cidade_id')
+    paginator = Paginator(destinos_list,5)
+    page = request.GET.get('page')
+    destinos = paginator.get_page(page)
+    form = DestinoForm
+    return render(request, 'core/lista_destinos.html', {'destinos': destinos, 'form': form})
+
+def destino_novo(request):
+    if request.method == "POST":
+        cidade_id = request.POST.get('cidade_id')
+        estado_id = request.POST.get('estado_id')
+        pais_id = request.POST.get('pais_id')
+        o = Destino.objects.create(
+            cidade_id = cidade_id,
+            estado_id = estado_id,
+            pais_id = pais_id
+        )
+        messages.success(request, 'Registro Cadastrado com Sucesso!')
+        return redirect('lista_destinos')
+
+    else:
+        form = DestinoForm()
+        cidades = Cidade.objects.all().order_by('nome')
+        estados = Estado.objects.all().order_by('nome')
+        paises = Pais.objects.all().order_by('nome')
+        return render(request, 'core/destino_novo.html',
+        {
+            'form': form,
+            'cidades': cidades,
+            'estados': estados,
+            'paises': paises
+        })
+
+def destino_update(request, id):
+    destino = Destino.objects.get(id=id)
+    cidades = Cidade.objects.all().order_by('nome')
+    estados = Estado.objects.all().order_by('nome')
+    paises = Pais.objects.all().order_by('nome')
     data = {}
-    data['origem'] = origem
-    data['form'] = form
-    return render(request, 'core/lista_origens.html')
+    data['destino'] = destino
+    data['cidades'] = cidades
+    data['estados'] = estados
+    data['paises'] = paises
+    if request.method == "POST":
+        destino.cidade_id = request.POST.get('cidade_id')
+        destino.estado_id = request.POST.get('estado_id')
+        destino.pais_id = request.POST.get('pais_id')
+        destino.save()
+        messages.success(request, 'Registro Alterado com Sucesso !')
+        return redirect('lista_destinos')
+    else:
+        return render(request, 'core/destino_update.html', data)
+
+
+def destino_delete(request, id):
+    destino = Destino.objects.get(id=id)
+    destino.delete()
+    destinos = Destino.objects.all().order_by('cidade_id')
+    messages.success(request, 'Destino excluído com sucesso !')
+    return render(request, 'core/lista_destinos.html', {'destinos': destinos})
 

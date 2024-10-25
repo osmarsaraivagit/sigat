@@ -42,18 +42,18 @@ class Funcao(models.Model):
 
 
 class Origem(models.Model):
-    cidade = models.ForeignKey('Cidade', on_delete=models.PROTECT)
-    estado = models.ForeignKey('Estado', on_delete=models.PROTECT)
-    pais = models.ForeignKey('Pais', on_delete=models.PROTECT)
+    cidade = models.ForeignKey('Cidade', null=True, on_delete=models.SET_NULL)
+    estado = models.ForeignKey('Estado', null=True, on_delete=models.SET_NULL)
+    pais = models.ForeignKey('Pais', null=True, on_delete=models.SET_NULL)
 
     class Meta:
 
         db_table = 'origem'
 
 class Destino(models.Model):
-    fk_cidade = models.ForeignKey('Cidade', on_delete=models.PROTECT)
-    fk_estado = models.ForeignKey('Estado', on_delete=models.PROTECT)
-    fk_pais = models.ForeignKey('Pais', on_delete=models.PROTECT)
+    cidade = models.ForeignKey('Cidade', null=True, on_delete=models.SET_NULL)
+    estado = models.ForeignKey('Estado',null=True, on_delete=models.SET_NULL)
+    pais = models.ForeignKey('Pais', null=True, on_delete=models.SET_NULL)
 
     class Meta:
 
@@ -79,8 +79,8 @@ class Cliente(models.Model):
     email = models.CharField(max_length=100, blank=False, null=False)
     endereco = models.CharField(max_length=80, blank=False, null=False)
     telefone = models.CharField(max_length=60, blank=False, null=False)
-    fk_cidade = models.ForeignKey('Cidade', on_delete=models.PROTECT)
-    fk_estado = models.ForeignKey('Estado', on_delete=models.PROTECT)
+    cidade = models.ForeignKey('Cidade', null=True, on_delete=models.SET_NULL)
+    estado = models.ForeignKey('Estado', null=True, on_delete=models.SET_NULL)
     data_cadastro = models.DateField(null=True, blank=True)
 
     def __str__(self):
@@ -109,8 +109,8 @@ class Empresa(models.Model):
     ie = models.CharField(max_length=80, blank=False, null=False)
     email = models.CharField(max_length=80, blank=False, null=False)
     endereco = models.CharField(max_length=100, blank=False, null=False)
-    fk_cidade = models.ForeignKey('Cidade', on_delete=models.PROTECT)
-    fk_estado = models.ForeignKey('Estado', on_delete=models.PROTECT)
+    cidade = models.ForeignKey('Cidade', null=True, on_delete=models.SET_NULL)
+    estado = models.ForeignKey('Estado', null=True, on_delete=models.SET_NULL)
     fone = models.CharField(max_length=30, blank=False, null=False)
     responsavel = models.CharField(max_length=80, blank=False, null=False)
     data_inicio = models.DateField(null=True, blank=True)
@@ -132,8 +132,8 @@ class Fornecedor(models.Model):
     endereco = models.CharField(max_length=80, blank=False, null=False)
     fone = models.CharField(max_length=30, blank=False, null=False)
     responsavel = models.CharField(max_length=80, blank=False, null=False)
-    fk_cidade = models.ForeignKey('Cidade', on_delete=models.PROTECT)
-    fk_estado = models.ForeignKey('Estado', on_delete=models.PROTECT)
+    cidade = models.ForeignKey('Cidade', null=True, on_delete=models.SET_NULL)
+    estado = models.ForeignKey('Estado', null=True, on_delete=models.SET_NULL)
     data_cadastro = models.DateField(null=True, blank=True)
 
     def __str__(self):
@@ -146,8 +146,8 @@ class Fornecedor(models.Model):
 
 class Frota(models.Model):
     nome_frota = models.CharField(max_length=20, blank=False, null=False)
-    fk_empresa = models.ForeignKey('Empresa', on_delete=models.PROTECT)
-    fk_situacoes = models.ForeignKey('Situacao', on_delete=models.PROTECT)
+    empresa = models.ForeignKey('Empresa', null=True, on_delete=models.SET_NULL)
+    situacoes = models.ForeignKey('Situacao', null=True, on_delete=models.SET_NULL)
     data_cadastro =models.DateField(null=True, blank=True)
 
     def __str__(self):
@@ -176,11 +176,11 @@ class Funcionario(models.Model):
     data_demissao = models.DateField(null=True, blank=True)
     email = models.CharField(max_length=100, blank=False, null=False)
     endereco = models.CharField(max_length=90, blank=False, null=False)
-    fk_funcao = models.ForeignKey('Funcao', on_delete=models.PROTECT)
+    funcao = models.ForeignKey('Funcao', null=True, on_delete=models.SET_NULL)
     telefone = models.CharField(max_length=60, blank=False, null=False)
-    fk_cidade = models.ForeignKey('Cidade', on_delete=models.PROTECT)
-    fk_estado = models.ForeignKey('Estado', on_delete=models.PROTECT)
-    fk_situacoes = models.ForeignKey('situacao', on_delete=models.PROTECT)
+    cidade = models.ForeignKey('Cidade', null=True, on_delete=models.SET_NULL)
+    estado = models.ForeignKey('Estado', null=True,on_delete=models.SET_NULL)
+    situacoes = models.ForeignKey('situacao', null=True, on_delete=models.SET_NULL)
     obs = models.CharField(max_length=100, blank=False, null=False)
 
     def __str__(self):
@@ -192,7 +192,7 @@ class Funcionario(models.Model):
 
 
 class LancarBaixaVeiculo(models.Model):
-    fk_veiculo = models.ForeignKey('veiculo', on_delete=models.PROTECT)
+    veiculo = models.ForeignKey('veiculo', null=True, on_delete=models.SET_NULL)
     data_venda = models.DateField(null=False, blank=True)
     km_final = models.IntegerField(null=False, blank=True)
     valor = models.DecimalField(max_digits=12, decimal_places=2, blank=False, null=False)
@@ -208,18 +208,18 @@ class LancarContabilidade(models.Model):
     data = models.DateField(null=False, blank=True)
     valor = models.DecimalField(max_digits=12, decimal_places=2, blank=False, null=False)
     historico = models.CharField(max_length=100, blank=False, null=False)
-    fk_plano_conta = models.ForeignKey('PlanoConta', on_delete=models.PROTECT)
-    fk_documento = models.ForeignKey('Documento', on_delete=models.PROTECT)
-    fk_empresa = models.ForeignKey('Empresa', on_delete=models.PROTECT)
-    fk_fornecedor = models.ForeignKey('Fornecedor', on_delete=models.PROTECT)
-    fk_veiculo = models.ForeignKey('Veiculo', on_delete=models.PROTECT)
+    plano_conta = models.ForeignKey('PlanoConta', null=True, on_delete=models.SET_NULL)
+    documento = models.ForeignKey('Documento', null=True, on_delete=models.SET_NULL)
+    empresa = models.ForeignKey('Empresa', null=True, on_delete=models.SET_NULL)
+    fornecedor = models.ForeignKey('Fornecedor',null=True, on_delete=models.SET_NULL)
+    veiculo = models.ForeignKey('Veiculo', null=True, on_delete=models.SET_NULL)
 
     class Meta:
         db_table = 'lancar_contabilidade'
 
 
 class LancarFerias(models.Model):
-    fk_funcionario = models.ForeignKey('Funcionario', on_delete=models.PROTECT)
+    funcionario = models.ForeignKey('Funcionario', null=True, on_delete=models.SET_NULL)
     data_inicio = models.DateField(null=False, blank=True)
     data_fim = models.DateField(null=False, blank=True)
     ano_referente = models.IntegerField(null=False, blank=True)
@@ -231,14 +231,14 @@ class LancarFerias(models.Model):
 
 
 class LancarFinanceiroViagem(models.Model):
-    fk_lancar_viagem = models.ForeignKey('LancarViagem', on_delete=models.PROTECT)
+    lancar_viagem = models.ForeignKey('LancarViagem', null=True, on_delete=models.SET_NULL)
     data = models.DateField(null=False, blank=True)
     valor = models.DecimalField(max_digits=12, decimal_places=2, blank=False, null=False)
     historico = models.CharField(max_length=100, blank=False, null=False)
-    fk_plano_conta = models.ForeignKey('PlanoConta', on_delete=models.PROTECT)
-    fk_documento = models.ForeignKey('Documento', on_delete=models.PROTECT)
-    fk_empresa = models.ForeignKey('Empresa', on_delete=models.PROTECT)
-    fk_fornecedor = models.ForeignKey('Fornecedor', on_delete=models.PROTECT)
+    plano_conta = models.ForeignKey('PlanoConta', null=True, on_delete=models.SET_NULL)
+    documento = models.ForeignKey('Documento', null=True, on_delete=models.SET_NULL)
+    empresa = models.ForeignKey('Empresa', null=True, on_delete=models.SET_NULL)
+    fornecedor = models.ForeignKey('Fornecedor', null=True,on_delete=models.SET_NULL)
   
 
     class Meta:
@@ -248,14 +248,14 @@ class LancarFinanceiroViagem(models.Model):
 class LancarViagem(models.Model):
     crtc = models.CharField(max_length=30, blank=False, null=False)
     data = models.DateField(null=False, blank=True)
-    fk_frota = models.ForeignKey('Frota', on_delete=models.PROTECT)
-    fk_motorista = models.ForeignKey('Funcionario', on_delete=models.PROTECT)
-    fk_origem = models.ForeignKey('Origem', on_delete=models.PROTECT)
-    fk_destino = models.ForeignKey('Destino', on_delete=models.PROTECT)
+    frota = models.ForeignKey('Frota', null=True, on_delete=models.SET_NULL)
+    motorista = models.ForeignKey('Funcionario', null=True, on_delete=models.SET_NULL)
+    origem = models.ForeignKey('Origem', null=True, on_delete=models.SET_NULL)
+    destino = models.ForeignKey('Destino', null=True, on_delete=models.SET_NULL)
     kminicial = models.IntegerField(db_column='kmInicial')  # Field name made lowercase.
     litragem = models.FloatField(null=False, blank=True)
     qtdeveiculos = models.IntegerField(null=False, blank=True)
-    fk_empresa = models.ForeignKey('Empresa', on_delete=models.PROTECT)
+    fk_empresa = models.ForeignKey('Empresa', null=True, on_delete=models.SET_NULL)
     obs = models.CharField(max_length=100, blank=False, null=False)
     status = models.CharField(max_length=30, blank=False, null=False)
 
@@ -306,7 +306,7 @@ class TipoVeiculo(models.Model):
 
 
 class Veiculo(models.Model):
-    fk_tipo_veiculo = models.ForeignKey('TipoVeiculo', on_delete=models.PROTECT)
+    tipo_veiculo = models.ForeignKey('TipoVeiculo', null=True, on_delete=models.SET_NULL)
     marca = models.CharField(max_length=80, blank=False, null=False)
     modelo = models.CharField(max_length=80, blank=False, null=False)
     ano = models.IntegerField(null=False, blank=True)
@@ -315,11 +315,11 @@ class Veiculo(models.Model):
     placas = models.CharField(max_length=80, blank=False, null=False)
     datacompra = models.DateField('data', null=False, blank=True)  # Field name made lowercase.
     valor = models.DecimalField(max_digits=12, decimal_places=2)
-    fk_empresa = models.ForeignKey('Empresa', on_delete=models.PROTECT)
-    fk_frota = models.ForeignKey('Frota', on_delete=models.PROTECT)
+    empresa = models.ForeignKey('Empresa', null=True, on_delete=models.SET_NULL)
+    frota = models.ForeignKey('Frota', null=True, on_delete=models.SET_NULL)
     tipo_aquisicao = models.CharField(max_length=50, blank=False, null=False)
     km_inicial = models.IntegerField(null=False, blank=True)
-    fk_situacoes = models.ForeignKey('situacao', on_delete=models.PROTECT)
+    situacoes = models.ForeignKey('situacao', null=True, on_delete=models.SET_NULL)
     obs = models.CharField(max_length=100, blank=False, null=False)
 
 
@@ -331,8 +331,8 @@ class LancarDocVeiculo(models.Model):
     nome = models.CharField(max_length=30, blank=False, null=False)
     data_realizado = models.DateField(null=False, blank=True)
     data_vencimento = models.DateField(null=False, blank=True)
-    fk_empresa = models.ForeignKey('Empresa', on_delete=models.PROTECT)
-    fk_veiculo = models.ForeignKey('Veiculo', on_delete=models.PROTECT)
+    empresa = models.ForeignKey('Empresa', null=True, on_delete=models.SET_NULL)
+    veiculo = models.ForeignKey('Veiculo', null=True, on_delete=models.SET_NULL)
     obs = models.CharField(max_length=100, blank=False, null=False)
     status = models.CharField(max_length=30, blank=False, null=False)
 
@@ -345,13 +345,13 @@ class LancarDocVeiculo(models.Model):
 
 
 class AcertoViagem(models.Model):
-    fk_lancar_viagem = models.ForeignKey('LancarViagem', on_delete=models.PROTECT)
+    lancar_viagem = models.ForeignKey('LancarViagem', null=True, on_delete=models.SET_NULL)
     data_acerto = models.DateField(null=False, blank=True)
     km_final = models.IntegerField(null=False, blank=True)
     valor = models.DecimalField(max_digits=11, decimal_places=2, blank=False, null=False)
     historico = models.CharField(max_length=100, blank=False, null=False)
-    fk_plano_conta = models.ForeignKey('PlanoConta', on_delete=models.PROTECT)
-    fk_forma_pagamento = models.ForeignKey('FormaPagamento', on_delete=models.PROTECT)
+    plano_conta = models.ForeignKey('PlanoConta', null=True, on_delete=models.SET_NULL)
+    forma_pagamento = models.ForeignKey('FormaPagamento', null=True, on_delete=models.SET_NULL)
 
     def __str__(self):
         return self.data_acerto
